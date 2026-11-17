@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concept C — The Blueprint Sheet</title>
+<style>
+@font-face{font-family:"Barlow Condensed";font-weight:400;src:url(fonts/barlow-condensed-latin-400-normal.woff2)}
+@font-face{font-family:"Barlow Condensed";font-weight:600;src:url(fonts/barlow-condensed-latin-600-normal.woff2)}
+@font-face{font-family:"Barlow Condensed";font-weight:700;src:url(fonts/barlow-condensed-latin-700-normal.woff2)}
+@font-face{font-family:"Barlow Condensed";font-weight:900;src:url(fonts/barlow-condensed-latin-900-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:400;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:600;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2)}
+@font-face{font-family:"Atkinson";font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+:root{--bp:#17399b;--line:#EAF0FF;--dim:rgba(234,240,255,.8);--cy:#7DF3E0;--am:#FFC857}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0c1d55;color:var(--line);font-family:"Barlow Condensed",system-ui,sans-serif}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1920px;height:1080px;position:relative;overflow:hidden;flex:none;background-color:var(--bp);
+ background-image:linear-gradient(rgba(255,255,255,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.11) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+ background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:36px 36px}
+.frame{position:absolute;inset:36px;border:3px solid var(--line);pointer-events:none;z-index:2}
+.frame::before{content:"";position:absolute;inset:14px;border:1px solid var(--dim)}
+.ref{position:absolute;font:600 18px Plex;color:var(--dim);z-index:2}
+.tb{position:absolute;right:36px;bottom:36px;width:620px;border:3px solid var(--line);border-right:0;border-bottom:0;background:var(--bp);z-index:3;display:grid;grid-template-columns:1fr 1fr 1fr;font:600 17px Plex}
+.tb div{border-right:1px solid var(--dim);border-bottom:1px solid var(--dim);padding:8px 12px;color:var(--dim)}
+.tb div b{display:block;font:700 26px "Barlow Condensed";color:var(--line);letter-spacing:.04em;margin-top:2px}
+.tb .w{grid-column:1/-1;display:flex;align-items:center;gap:16px}
+.tb .w img{height:40px}
+.slide{position:absolute;inset:36px;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s;z-index:1}
+.slide.active{opacity:1;visibility:visible;transition:opacity .35s}
+.slide>*{animation:none}
+h1{font:900 300px/.82 "Barlow Condensed";text-transform:uppercase;letter-spacing:-.01em;color:var(--line)}
+.sub{font:600 44px/1.15 "Barlow Condensed";text-transform:uppercase;letter-spacing:.06em;max-width:1050px}
+.mono{font:400 22px/1.7 Plex;color:var(--dim)}
+.dim{position:absolute;border-top:2px solid var(--cy);color:var(--cy);font:600 18px Plex}
+.dim::before,.dim::after{content:"";position:absolute;top:-9px;width:2px;height:16px;background:var(--cy)}
+.dim::before{left:0}.dim::after{right:0}
+.dim span{position:absolute;left:50%;top:-30px;transform:translateX(-50%);background:var(--bp);padding:0 10px}
+.callout{position:absolute;color:var(--line)}
+.callout .num{font:900 230px/.85 "Barlow Condensed";letter-spacing:-.02em}
+.callout .num small{font:600 44px "Barlow Condensed";margin-left:12px;color:var(--cy);letter-spacing:.04em}
+.callout p{font:400 26px/1.45 Plex;max-width:520px;margin-top:10px;color:var(--line)}
+.callout .bub{position:absolute;left:-58px;top:6px;width:46px;height:46px;border-radius:50%;border:2.5px solid var(--cy);color:var(--cy);display:grid;place-items:center;font:700 24px "Barlow Condensed"}
+.lead{position:absolute;height:2px;background:var(--cy)}
+#sysSvg{position:absolute;left:60px;top:90px;width:1740px;height:720px}
+.cap{position:absolute;left:70px;bottom:36px;width:1180px}
+.cap .s{font:600 20px Plex;color:var(--cy)}
+.cap .t{font:700 54px "Barlow Condensed";text-transform:uppercase;letter-spacing:.03em;margin-top:2px}
+.cap .d{font:400 22px/1.5 Plex;color:var(--dim);margin-top:6px}
+.ttl{position:absolute;left:70px;top:44px;font:700 36px "Barlow Condensed";text-transform:uppercase;letter-spacing:.1em}
+.node .box{fill:var(--bp);stroke:var(--line);stroke-width:2;rx:0}
+.node .tile{fill:none;stroke:var(--dim);stroke-width:1.2;rx:0}
+.node .ico{stroke:var(--line);stroke-width:1.7}
+.node .lb{font:700 24px "Barlow Condensed";fill:var(--line);text-transform:uppercase;letter-spacing:.06em}
+.node .sb{font:600 18px "Barlow Condensed";letter-spacing:.03em;fill:var(--dim)}
+.node.seen .box{stroke:var(--cy)}
+.node.lit .box{fill:var(--line);stroke:var(--line);stroke-width:2}
+.node.lit .lb{fill:var(--bp)}.node.lit .sb{fill:#31407f}.node.lit .ico{stroke:var(--bp)}.node.lit .tile{stroke:#31407f}
+.edge{fill:none;stroke:var(--line);stroke-width:1.6;opacity:.45}
+.edge.done{opacity:.8;stroke:var(--cy)}.edge.on{opacity:1;stroke:var(--cy);stroke-width:3}
+.arrow{fill:var(--line);opacity:.5}.arrow.done,.arrow.on{fill:var(--cy);opacity:1}
+.packet{fill:var(--am);stroke:var(--bp);stroke-width:2.5}
+.pc{position:fixed;right:20px;top:12px;font:400 16px Plex;color:#cfd9ff;z-index:9}
+body.shot *{transition:none!important}
+</style></head><body>
+<div id="viewport"><div id="stage">
+<div class="frame"></div>
+<span class="ref" style="left:62px;top:6px">A</span><span class="ref" style="left:62px;top:1050px">B</span>
+<span class="ref" style="left:1840px;top:6px">H</span>
+<span class="ref" style="left:8px;top:300px">1</span><span class="ref" style="left:8px;top:700px">2</span><span class="ref" style="left:1894px;top:300px">1</span><span class="ref" style="left:1894px;top:700px">2</span>
+<div class="tb"><div class="w"><img src="../Assets/logos/symbol-white.svg" alt=""><b style="font-size:34px;margin:0">SYNAPSE</b></div><div>PROJECT<b>FYP 2023&ndash;27</b></div><div>SHEET<b id="sheet">1 OF 3</b></div><div>REV<b>A</b></div></div>
+
+<section class="slide" id="sC1">
+ <div class="ttl">General arrangement</div>
+ <div style="position:absolute;left:110px;top:210px"><h1>Synapse</h1>
+  <div class="sub" style="margin-top:34px">Multimodal AI accessibility for online STEM education of blind learners</div>
+  <div class="mono" style="margin-top:30px">DRAWN BY&nbsp; Hafiz Abdullah Saim / Maha Khalid / Memoona Shahid<br>CHECKED&nbsp;&nbsp; Mr. Amaid Zia<br>COMSATS UNIVERSITY ISLAMABAD, LAHORE CAMPUS</div></div>
+ <div class="dim" style="left:112px;width:1160px;top:200px"><span>1160 &mdash; SYNAPSE</span></div>
+</section>
+
+<section class="slide" id="sC2">
+ <div class="ttl">Problem statement</div>
+ <div class="callout" style="left:150px;top:200px"><div class="bub">1</div><div class="num">285<small>MILLION</small></div><p>people worldwide live with a visual impairment.</p></div>
+ <div class="callout" style="left:730px;top:200px"><div class="bub">2</div><div class="num">39<small>MILLION</small></div><p>of them are completely blind.</p></div>
+ <div class="callout" style="left:1310px;top:200px"><div class="bub">3</div><div class="num">70<small>%</small></div><p>of STEM content is inaccessible when visuals are not converted.</p></div>
+ <div class="lead" style="left:150px;width:1500px;top:560px;opacity:.5"></div>
+ <div style="position:absolute;left:150px;top:600px;font:600 60px/1.05 'Barlow Condensed';text-transform:uppercase;max-width:1300px;letter-spacing:.02em">STEM lectures are built on what you can see.</div>
+ <div class="mono" style="position:absolute;left:150px;top:760px;max-width:1100px">NOTE &mdash; Screen readers stop at text. Captions miss the visuals. Tools work in isolation. Sources: WHO (Pascolini &amp; Mariotti, 2012).</div>
+</section>
+
+<section class="slide" id="sC3">
+ <div class="ttl">System architecture &mdash; general view</div>
+ <svg id="sysSvg"></svg>
+ <div class="cap"><div class="s" id="capS"></div><div class="t" id="capT"></div><div class="d" id="capD"></div></div>
+</section>
+</div></div>
+<div class="pc" id="pc"></div>
+<script>window.CONCEPT_CAT={user:{f:'#fff',k:'#EAF0FF'},frontend:{f:'#fff',k:'#EAF0FF'},backend:{f:'#fff',k:'#EAF0FF'},multimodal:{f:'#fff',k:'#EAF0FF'},inference:{f:'#fff',k:'#EAF0FF'},storage:{f:'#fff',k:'#EAF0FF'},external:{f:'#fff',k:'#EAF0FF'}};</script>
+<script src="../icons.js"></script><script src="../diagrams.js"></script><script src="concept.js"></script>
+<script>const upd=()=>{document.getElementById('sheet').textContent=document.body.dataset.slide+' OF 3'};new MutationObserver(upd).observe(document.body,{attributes:true,attributeFilter:['data-slide']});upd();</script>
+</body></html>

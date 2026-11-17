@@ -1,0 +1,40 @@
+@font-face{font-family:AtkN;font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+@font-face{font-family:AtkN;font-weight:600;src:url(fonts/atkinson-hyperlegible-next-latin-600-normal.woff2)}
+@font-face{font-family:AtkN;font-weight:700;src:url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2)}
+@font-face{font-family:AtkM;font-weight:400;src:url(fonts/atkinson-hyperlegible-mono-latin-400-normal.woff2)}
+@font-face{font-family:AtkM;font-weight:600;src:url(fonts/atkinson-hyperlegible-mono-latin-600-normal.woff2)}
+@font-face{font-family:Gloock;src:url(fonts/gloock-latin-400-normal.woff2)}
+@font-face{font-family:CourierP;font-weight:400;src:url(fonts/courier-prime-latin-400-normal.woff2)}
+@font-face{font-family:CourierP;font-weight:700;src:url(fonts/courier-prime-latin-700-normal.woff2)}
+@font-face{font-family:Plex;font-weight:400;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2)}
+@font-face{font-family:Archivo;src:url(fonts/archivo-black-latin-400-normal.woff2)}
+@font-face{font-family:BarlowC;font-weight:600;src:url(fonts/barlow-condensed-latin-600-normal.woff2)}
+@font-face{font-family:BarlowC;font-weight:700;src:url(fonts/barlow-condensed-latin-700-normal.woff2)}
+@font-face{font-family:SpecialE;src:url(fonts/special-elite-latin-400-normal.woff2)}
+@font-face{font-family:Caveat;font-weight:400;src:url(fonts/caveat-latin-400-normal.woff2)}
+@font-face{font-family:Caveat;font-weight:700;src:url(fonts/caveat-latin-700-normal.woff2)}
+@font-face{font-family:Caslon;font-weight:400;src:url(fonts/libre-caslon-text-latin-400-normal.woff2)}
+@font-face{font-family:Caslon;font-weight:700;src:url(fonts/libre-caslon-text-latin-700-normal.woff2)}
+@font-face{font-family:ShareT;src:url(fonts/share-tech-mono-latin-400-normal.woff2)}
+@font-face{font-family:Bebas;src:url(fonts/bebas-neue-latin-400-normal.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0d0c1e;font-family:AtkN,system-ui,sans-serif}
+#vp{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:relative;overflow:hidden;flex:none;transform-origin:center center}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden}
+.slide.active{opacity:1;visibility:visible}
+svg.dg{display:block;overflow:visible}
+.edge{fill:none;stroke:var(--k);stroke-width:2.2;opacity:.34}
+.edge.done{opacity:.62}.edge.on{opacity:1;stroke-width:3.4}
+.edge.dots{stroke-dasharray:1 9;stroke-linecap:round;stroke-width:4}
+.edge.ribbon{stroke-width:12;stroke-linecap:round}
+.edge.ribbon.on{stroke-width:14}
+.pk{fill:var(--pkc,#000)}.pk.rg{fill:none;stroke:var(--pkc,#000);stroke-width:2}.pk.rg2{fill:none;stroke:var(--pkc,#000);stroke-width:1.4;opacity:.6}
+.pks{stroke:var(--pkc,#000);stroke-width:3;fill:none;stroke-linecap:round}.pkc{fill:var(--pkb,#fff)}
+.pkt{font:600 11px AtkN;fill:var(--pkb,#fff)}
+.bx.rf{filter:url(#rough)}
+.ico{stroke:var(--k);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#hud{position:fixed;right:14px;top:10px;z-index:9;font:600 13px AtkM,monospace;color:#c9c6ee;opacity:.8}
+#hud b{color:#fff}
+body.shot *{transition:none!important}

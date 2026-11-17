@@ -1,0 +1,53 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T05:59:23.146Z",
+        "reason": "assistant: only instance is the slide-5 illustration frame, whose svg and scan line are already inset 14px; detector flags the wrapper edge"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "concepts/c-blueprint.html"
+        ],
+        "createdAt": "2026-11-16T06:56:39.158Z",
+        "reason": "assistant: full-bleed blueprint sheet canvas; the sheet itself is the container, content is inset by the frame"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "concepts/d-poster.html"
+        ],
+        "createdAt": "2026-11-16T06:56:39.409Z",
+        "reason": "assistant: full-bleed colour-block poster; flush edges are the design"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "concepts/c-blueprint.html"
+        ],
+        "createdAt": "2026-11-16T06:56:39.700Z",
+        "reason": "assistant: the grid is the blueprint-sheet concept, not decoration"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "concepts/a-catalog.html"
+        ],
+        "createdAt": "2026-11-16T06:57:30.763Z",
+        "reason": "assistant: the wood-grain of the catalog drawer interior is part of concept A"
+      }
+    ]
+  }
+}

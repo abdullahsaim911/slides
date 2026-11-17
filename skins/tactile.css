@@ -1,0 +1,47 @@
+/* WORLD 3: TACTILE. Braille: titles echo in real braille, progress is a row of braille cells. */
+:root{--bg:#15123D;--card:#201C55;--pale:#201C55;--ink:#F3F0FF;--soft:#BDB8E6;--ind:#C9C2FF;--teal:#7FE3D2;--deep:#0e0c2c;--line:rgba(201,194,255,.3);--rule:rgba(201,194,255,.42)}
+html,body{background:#0b0a24}
+#stage{background-color:#15123D;background-image:radial-gradient(circle,rgba(201,194,255,.17) 2.6px,transparent 3px);background-size:30px 30px;background-position:15px 15px}
+.dark{background:#0c0a26}
+.dark::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(201,194,255,.2) 2.6px,transparent 3px);background-size:30px 30px;background-position:15px 15px;pointer-events:none}
+#s1 .t-wrap{z-index:2}
+#s1 .mark{opacity:.08;z-index:1}
+h2{color:var(--ink)}
+.ind{color:var(--teal)}
+.stat .n{color:#fff}
+.steps .dot{background:var(--card);border-color:var(--teal);color:var(--teal)}
+.steps::before{background:var(--rule)}
+.steps::after{background:var(--teal)}
+.tile i,.feats i,.trio i,.mod i{color:var(--teal)}
+.tech span,.t-meta{color:var(--soft)}
+.demo{background:var(--card);border-color:var(--line)}
+.vid{background:#171447}
+.vid svg text{fill:var(--soft)}
+#demoCurve{stroke:var(--teal)}
+.vid svg path[fill-opacity]{fill:var(--teal)}
+.wave i{background:var(--teal)}
+.demo .txt .cur{background:var(--teal)}
+.thanks .q{color:var(--teal)}
+.dbar{background:var(--card)}
+.chips button{background:transparent;color:var(--soft)}
+.chips button.on,.ctrls button.play{background:var(--teal);color:#0e0c2c;border-color:var(--teal)}
+.chips button.seen{color:var(--teal)}
+.ctrls button{background:transparent;color:var(--ink)}
+.ctrls button.play:hover{background:#9ff0e1}
+#hud button,#count{background:var(--card);color:var(--ink);border-color:var(--line)}
+#progress{background:var(--teal)}
+.band{fill:rgba(255,255,255,.035);stroke:var(--line)}
+.node .box{fill:var(--card);stroke:var(--line)}
+.node .tile{fill:var(--f)}
+.node.seen .box{stroke:var(--k);stroke-opacity:.7}
+.node.lit .box{fill:var(--f);stroke:var(--k);stroke-width:2.6;filter:none}
+.packet{stroke:#15123D}
+.legend i{background:var(--c);border-color:var(--k)}
+.bfoot{left:120px;right:120px;bottom:24px;height:60px;display:flex;justify-content:space-between;align-items:center}
+.becho{font:400 40px/1 "Segoe UI Symbol","Apple Braille","DejaVu Sans",sans-serif;color:var(--soft);letter-spacing:.06em;white-space:nowrap;opacity:.85}
+.bcells{display:flex;gap:16px}
+.bc{display:grid;grid-template-columns:repeat(2,8px);grid-template-rows:repeat(3,8px);grid-auto-flow:column;gap:5px;padding:4px 5px}
+.bc i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--rule);background:transparent;transition:background .3s,border-color .3s}
+.bc.past i.r{background:var(--soft);border-color:var(--soft)}
+.bc.cur i{background:var(--teal);border-color:var(--teal)}
+.bc.cur{outline:1.5px solid var(--teal);outline-offset:2px;border-radius:5px}

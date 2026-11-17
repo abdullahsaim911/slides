@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synapse — choose a design world</title>
+<style>
+@font-face{font-family:"Atkinson Hyperlegible Next";font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+@font-face{font-family:"Atkinson Hyperlegible Next";font-weight:700;src:url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow:auto}
+body{font-family:"Atkinson Hyperlegible Next",system-ui,sans-serif;background:#ECEEFC;color:#14172B;padding:52px 72px 64px}
+h1{font-size:44px;letter-spacing:-.02em;color:#362CAC}
+p.l{font-size:20px;line-height:1.5;color:#373E5C;margin-top:12px;max-width:1000px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:34px}
+a.c{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #C3C9E6;border-radius:12px;overflow:hidden;transition:transform .2s,border-color .2s}
+a.c:hover,a.c:focus-visible{transform:translateY(-4px);border-color:#362CAC;outline:none}
+.th{aspect-ratio:16/9;position:relative;overflow:hidden;background:#ddd}
+.th iframe{position:absolute;left:0;top:0;width:1920px;height:1080px;border:0;transform-origin:0 0;pointer-events:none}
+.t{padding:18px 22px 22px}
+.t b{font-size:25px;display:block}
+.t em{font-style:normal;font-size:17px;font-weight:700;color:#064E4A;display:block;margin-top:6px}
+.t span{font-size:18px;line-height:1.5;color:#373E5C;display:block;margin-top:8px}
+.k{margin-top:30px;font-size:18px;color:#373E5C;line-height:1.6}
+</style></head><body>
+<h1>Choose a design world</h1>
+<p class="l">Each world comes from the project itself and puts one signature device on every slide. The content, the two animated diagrams and the verified architecture are identical in all of them. Click a card to present it.</p>
+<div class="grid">
+ <a class="c" href="index.html?skin=signal"><div class="th"><iframe src="index.html?skin=signal&shot#3" tabindex="-1"></iframe></div><div class="t"><b>1 &middot; Signal</b><em>From the name: a synapse</em><span>The whole deck is one axon. A row of neurons runs along the bottom, and an impulse crosses a synapse each time you change slide. Keeps your Paper palette.</span></div></a>
+ <a class="c" href="index.html?skin=sound"><div class="th"><iframe src="index.html?skin=sound&shot#6.4" tabindex="-1"></iframe></div><div class="t"><b>2 &middot; Sound</b><em>From the product: description, spoken</em><span>Every slide is described aloud, like an audio description track. A ribbon at the bottom types out the narration with a running timecode and waveform. Warm paper, ink and highlighter.</span></div></a>
+ <a class="c" href="index.html?skin=tactile"><div class="th"><iframe src="index.html?skin=tactile&shot#3" tabindex="-1"></iframe></div><div class="t"><b>3 &middot; Tactile</b><em>From the audience: braille</em><span>Every slide title is echoed in real braille, and progress is a row of braille cells. A dark, high-contrast ground with a raised-dot texture.</span></div></a>
+ <a class="c" href="index.html"><div class="th"><iframe src="index.html?shot#3" tabindex="-1"></iframe></div><div class="t"><b>0 &middot; Clean (current)</b><em>The plain Paper theme</em><span>The flat, hairline-and-whitespace deck with no signature device. The safe baseline.</span></div></a>
+</div>
+<p class="k">Inside a deck: &rarr; or Space for next, &larr; for back, F for fullscreen, P to auto-play the diagrams. On the two architecture slides, &rarr; plays each animation step first.</p>
+<script>function fit(){document.querySelectorAll('.th').forEach(t=>{t.querySelector('iframe').style.transform='scale('+t.clientWidth/1920+')'})}addEventListener('resize',fit);fit();</script>
+</body></html>

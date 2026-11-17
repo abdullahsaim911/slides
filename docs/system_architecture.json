@@ -1,0 +1,2403 @@
+{
+  "metadata": {
+    "name": "Synapse Complete System Architecture",
+    "scope": "high-level",
+    "description": "Accessible React/Electron lecture application, FastAPI coordination, detection-first multimodal processing, staged explanation preparation, configurable inference and local persistence.",
+    "source": "Current local source code",
+    "verificationStatus": "static_source_inspection_only; runtime, deployment and effective environment configuration unverified",
+    "sourceRoots": {
+      "backend": ".",
+      "frontend": "synapse-web"
+    },
+    "statusSemantics": "implemented describes connected code, not successful execution. partial describes limited or incomplete capability. code_supported edges are statically traced, never live-verified.",
+    "layoutSemantics": "Use groupId for boundaries and directed edges for layout. Flows are subgraphs; edgeIds are not necessarily a single sequential list. Alternative paths and parallel branches must remain distinct.",
+    "animationSemantics": "Logical illustration of source-supported paths only; not runtime telemetry. No technical durations are supplied. Conditional phases require their trigger; skipped phases bypass to the appropriate next stage.",
+    "gesturePolicy": "Gesture/interaction-cue analysis is an embedded optional capability of frame and visual processing, not an independently drawn module or service. Preserve its partial status and possible fusion into synchronization in descriptions and evidence; do not animate unverified gesture cues as confirmed operational data flow.",
+    "evidenceIndex": {
+      "S01": [
+        {
+          "path": "synapse-web/package.json",
+          "symbol": "dependencies, devDependencies, scripts"
+        },
+        {
+          "path": "synapse-web/src/main.jsx",
+          "symbol": "React application entry"
+        }
+      ],
+      "S02": [
+        {
+          "path": "synapse-web/src/App.jsx",
+          "symbol": "App and state-driven screen selection"
+        }
+      ],
+      "S03": [
+        {
+          "path": "synapse-web/src/api.js",
+          "symbol": "processVideo, requestProcessingJob, waitForProcessingJob, explanation/preparation adapters"
+        },
+        {
+          "path": "synapse-web/src/lib/apiConfig.js",
+          "symbol": "API_BASE_URL, API_MOCK_MODE"
+        }
+      ],
+      "S04": [
+        {
+          "path": "synapse-web/src/components/Explanation.jsx",
+          "symbol": "Explanation, YouTube player, pause ownership and audio controls"
+        },
+        {
+          "path": "synapse-web/src/hooks/useLecturePlaybackGate.js",
+          "symbol": "useLecturePlaybackGate"
+        }
+      ],
+      "S05": [
+        {
+          "path": "synapse-web/src/hooks/useExplanationConversation.js",
+          "symbol": "useExplanationConversation"
+        },
+        {
+          "path": "synapse-web/src/lib/lectureRequests.js",
+          "symbol": "ensureLectureSession, requestLectureExplanation, releaseLectureSession"
+        }
+      ],
+      "S06": [
+        {
+          "path": "synapse-web/src/lib/accountSession.js",
+          "symbol": "account session restoration and accountRequest"
+        },
+        {
+          "path": "synapse-web/src/lib/personalApi.js",
+          "symbol": "personalRequest, loadSavedAudio"
+        }
+      ],
+      "S07": [
+        {
+          "path": "synapse-web/src/voice/VoiceControl.jsx",
+          "symbol": "VoiceControl"
+        },
+        {
+          "path": "synapse-web/src/voice/VoiceAudioProvider.jsx",
+          "symbol": "VoiceAudioProvider"
+        },
+        {
+          "path": "synapse-web/src/voice/voiceSpeech.js",
+          "symbol": "createSpeaker"
+        }
+      ],
+      "S08": [
+        {
+          "path": "synapse-web/src/lib/shortcuts.js",
+          "symbol": "LECTURE_SHORTCUT_ROWS, HOME_SHORTCUT_ROWS"
+        },
+        {
+          "path": "synapse-web/src/components/HelpDialog.jsx",
+          "symbol": "HelpDialog"
+        },
+        {
+          "path": "synapse-web/src/index.css",
+          "symbol": "theme and accessibility rules"
+        }
+      ],
+      "S09": [
+        {
+          "path": "synapse-web/electron.cjs",
+          "symbol": "createWindow and application lifecycle"
+        },
+        {
+          "path": "synapse-web/electron/localFrontend.cjs",
+          "symbol": "startLocalFrontend"
+        },
+        {
+          "path": "synapse-web/electron/permissions.cjs",
+          "symbol": "createPermissionPolicy, installPermissionPolicy"
+        }
+      ],
+      "S10": [
+        {
+          "path": "api/main.py",
+          "symbol": "app, lifespan, readiness_check"
+        }
+      ],
+      "S11": [
+        {
+          "path": "api/routers/video.py",
+          "symbol": "processing-job handlers, explanation handlers, stream_explanation, get_explanation_audio, ask_question"
+        },
+        {
+          "path": "api/schemas.py",
+          "symbol": "ProcessVideoRequest, GenerateExplanationRequest, GenerateExplanationResponse, InterventionResponse"
+        }
+      ],
+      "S12": [
+        {
+          "path": "api/auth.py",
+          "symbol": "get_current_user, local_transport, check_session_at_commit, signup, login, logout"
+        },
+        {
+          "path": "api/security.py",
+          "symbol": "configure_cors, enforce_allowed_origin"
+        }
+      ],
+      "S13": [
+        {
+          "path": "api/processing_jobs.py",
+          "symbol": "ProcessingJobManager, _run_claimed, persist_processing_result"
+        },
+        {
+          "path": "api/resource_guard.py",
+          "symbol": "require_processing_headroom"
+        }
+      ],
+      "S14": [
+        {
+          "path": "api/explanation_preparation.py",
+          "symbol": "ExplanationPreparationManager, evidence/text/TTS workers and lease/checkpoint lifecycle"
+        },
+        {
+          "path": "api/explanation_service.py",
+          "symbol": "prepare_visual_evidence, prepare_explanation_text, generate_explanation_from_evidence, find_valid_cached_explanation"
+        }
+      ],
+      "S15": [
+        {
+          "path": "api/on_demand.py",
+          "symbol": "OnDemandExplanations"
+        },
+        {
+          "path": "api/routers/explanation_requests.py",
+          "symbol": "lecture session and explanation request handlers"
+        }
+      ],
+      "S16": [
+        {
+          "path": "orchestrator/orchestrator.py",
+          "symbol": "PipelineOrchestrator.process_detection_only, _ingest, _execute_parallel_extraction, _synchronize"
+        }
+      ],
+      "S17": [
+        {
+          "path": "transcription/process_runtime.py",
+          "symbol": "TranscriptionProcessRuntime, _run_worker"
+        },
+        {
+          "path": "transcription/transcriber/transcription_engine.py",
+          "symbol": "TranscriptionEngine.transcribe"
+        },
+        {
+          "path": "transcription/transcriber/whisper_runner.py",
+          "symbol": "WhisperRunner"
+        }
+      ],
+      "S18": [
+        {
+          "path": "frame_extraction/pedagogical_extractor_v2.py",
+          "symbol": "extract_pedagogical_keyframes, get_clip"
+        }
+      ],
+      "S19": [
+        {
+          "path": "synapse_interaction/detector.py",
+          "symbol": "detect_interactions"
+        },
+        {
+          "path": "synapse_interaction/fusion.py",
+          "symbol": "fuse_interactions"
+        },
+        {
+          "path": "synapse_interaction/hand.py",
+          "symbol": "optional MediaPipe implementation"
+        },
+        {
+          "path": "orchestrator/orchestrator.py",
+          "symbol": "_execute_parallel_extraction: Config(enable_hand=False); _synchronize: optional fusion"
+        }
+      ],
+      "S20": [
+        {
+          "path": "synchronizer/synchronizer.py",
+          "symbol": "Synchronizer.detect_suffer_points, reconcile_visual_evidence"
+        },
+        {
+          "path": "synthesizer/context_manager.py",
+          "symbol": "ContextManager.get_aligned_context"
+        }
+      ],
+      "S21": [
+        {
+          "path": "orchestrator/orchestrator.py",
+          "symbol": "extract_visual_evidence"
+        },
+        {
+          "path": "vlm_engine/snapshot_engine.py",
+          "symbol": "SnapshotEngine.analyze_frame"
+        },
+        {
+          "path": "vlm_engine/evidence_refinement.py",
+          "symbol": "refine_critical_details"
+        }
+      ],
+      "S22": [
+        {
+          "path": "vlm_interface/modal_vlm_interface.py",
+          "symbol": "ModalVLMInterface"
+        },
+        {
+          "path": "modal_inference/config.py",
+          "symbol": "MODEL_ID, VLLM_VERSION, GPU_FALLBACKS"
+        },
+        {
+          "path": "modal_inference/app.py",
+          "symbol": "Modal/vLLM serving definition"
+        },
+        {
+          "path": "vlm_engine/gguf_vlm_engine.py",
+          "symbol": "alternative local GGUF engine"
+        }
+      ],
+      "S23": [
+        {
+          "path": "visual_evidence/models.py",
+          "symbol": "VisualEvidence and canonical evidence records"
+        },
+        {
+          "path": "visual_evidence/assembler.py",
+          "symbol": "assemble_visual_evidence"
+        },
+        {
+          "path": "visual_evidence/validation.py",
+          "symbol": "validate_visual_evidence"
+        },
+        {
+          "path": "visual_evidence/usability.py",
+          "symbol": "assess_snapshot"
+        }
+      ],
+      "S24": [
+        {
+          "path": "orchestrator/orchestrator.py",
+          "symbol": "synthesize_intervention_text"
+        },
+        {
+          "path": "synthesizer/llm_synthesizer.py",
+          "symbol": "LLMSynthesizer.weave, _call_llm, explain_transcript"
+        },
+        {
+          "path": "synthesizer/configuration.py",
+          "symbol": "explanation_profile, configured_explanation_provider"
+        }
+      ],
+      "S25": [
+        {
+          "path": "llm_interface/ollama_client.py",
+          "symbol": "Ollama client"
+        },
+        {
+          "path": "llm_interface/modal_mistral_provider.py",
+          "symbol": "ModalMistralProvider"
+        },
+        {
+          "path": "modal_inference/mistral_config.py",
+          "symbol": "MODEL_ID, MODEL_REVISION, build_serve_command"
+        },
+        {
+          "path": "modal_inference/mistral_app.py",
+          "symbol": "serve"
+        },
+        {
+          "path": "llm_interface/gemini_provider.py",
+          "symbol": "DEFAULT_MODEL and Gemini provider"
+        }
+      ],
+      "S26": [
+        {
+          "path": "orchestrator/orchestrator.py",
+          "symbol": "generate_intervention_audio"
+        },
+        {
+          "path": "tts_engine/tts_engine.py",
+          "symbol": "shared explanation speech engine"
+        },
+        {
+          "path": "tts_engine/providers.py",
+          "symbol": "tts_profile, PocketTTSProvider, KokoroProvider"
+        },
+        {
+          "path": "tts_engine/streaming.py",
+          "symbol": "attempt-scoped NDJSON audio events"
+        },
+        {
+          "path": "synapse-web/src/lib/ttsStream.js",
+          "symbol": "frontend streamed speech playback"
+        }
+      ],
+      "S27": [
+        {
+          "path": "voice/routes.py",
+          "symbol": "transcribe, interpret, speak, get_tts"
+        },
+        {
+          "path": "voice/stt.py",
+          "symbol": "Recognizer, decode_wav"
+        },
+        {
+          "path": "voice/interpret.py",
+          "symbol": "EMBED_MODEL and catalog interpretation"
+        },
+        {
+          "path": "voice/process_runtime.py",
+          "symbol": "VoiceProcessRuntime"
+        },
+        {
+          "path": "voice/piper_speaker.py",
+          "symbol": "PiperSpeaker"
+        }
+      ],
+      "S28": [
+        {
+          "path": "qa/service.py",
+          "symbol": "AskService"
+        },
+        {
+          "path": "qa/retrieval.py",
+          "symbol": "select_evidence"
+        },
+        {
+          "path": "qa/hybrid.py",
+          "symbol": "optional HybridSelector"
+        },
+        {
+          "path": "qa/faithfulness.py",
+          "symbol": "optional answer gate"
+        },
+        {
+          "path": "quiz/service.py",
+          "symbol": "QuizService"
+        },
+        {
+          "path": "api/routers/quiz.py",
+          "symbol": "create_quiz"
+        },
+        {
+          "path": "llm_interface/providers.py",
+          "symbol": "get_text_provider, DEFAULT_PROVIDER"
+        }
+      ],
+      "S29": [
+        {
+          "path": "synapse-web/src/components/AskLecture.jsx",
+          "symbol": "AskLecture"
+        },
+        {
+          "path": "synapse-web/src/components/QuizScreen.jsx",
+          "symbol": "QuizScreen"
+        },
+        {
+          "path": "synapse-web/src/lib/quizFlag.js",
+          "symbol": "quizEnabled"
+        },
+        {
+          "path": "quiz/config.py",
+          "symbol": "quiz_enabled"
+        }
+      ],
+      "S30": [
+        {
+          "path": "api/database.py",
+          "symbol": "create_database_engine, SessionLocal, get_db"
+        },
+        {
+          "path": "api/models.py",
+          "symbol": "shared lecture/artifact/job and owned account/request/history models"
+        },
+        {
+          "path": "api/migrations.py",
+          "symbol": "require_current_schema"
+        }
+      ],
+      "S31": [
+        {
+          "path": "api/personal_storage.py",
+          "symbol": "snapshot, publish, media_path, reconcile_media"
+        },
+        {
+          "path": "api/routers/personal_storage.py",
+          "symbol": "saved explanation and voice-note handlers"
+        },
+        {
+          "path": "api/routers/learning_history.py",
+          "symbol": "library, recent activity and playback handlers"
+        }
+      ],
+      "S32": [
+        {
+          "path": "explanation_cache.py",
+          "symbol": "cache_is_current, text_cache_is_current and manifests"
+        },
+        {
+          "path": "api/explanation_service.py",
+          "symbol": "resolve_explanation_audio_path, _extract_requested_frame"
+        }
+      ],
+      "S33": [
+        {
+          "path": "synapse-web/src/storage.js",
+          "symbol": "browser library/history helpers"
+        },
+        {
+          "path": "synapse-web/src/lib/notesStore.js",
+          "symbol": "note recovery storage"
+        },
+        {
+          "path": "synapse-web/src/lib/backendNotes.js",
+          "symbol": "saveNote and draft recovery helpers"
+        },
+        {
+          "path": "synapse-web/src/hooks/useVoiceRecorder.js",
+          "symbol": "useVoiceRecorder"
+        },
+        {
+          "path": "synapse-web/src/lib/quizStore.js",
+          "symbol": "quiz attempts"
+        },
+        {
+          "path": "synapse-web/src/hooks/useQuizSession.js",
+          "symbol": "useQuizSession"
+        },
+        {
+          "path": "synapse-web/src/lib/displayPrefs.js",
+          "symbol": "quiz display preferences"
+        }
+      ],
+      "S34": [
+        {
+          "path": "synapse-web/src/lib/structuredViewDemo.js",
+          "symbol": "resolveStructuredView, STRUCTURED_VIEW_DEMO_LABEL"
+        },
+        {
+          "path": "api/schemas.py",
+          "symbol": "InterventionResponse, GenerateExplanationResponse"
+        }
+      ],
+      "S35": [
+        {
+          "path": "api/youtube_search.py",
+          "symbol": "YouTubeSearchService"
+        },
+        {
+          "path": "youtube_runtime.py",
+          "symbol": "extract_youtube_video_id, youtube_runtime_options"
+        }
+      ]
+    }
+  },
+  "groups": [
+    {
+      "id": "user",
+      "label": "Learner",
+      "description": "Accessible input and explanation consumption.",
+      "type": "actor"
+    },
+    {
+      "id": "frontend",
+      "label": "Frontend Application",
+      "description": "React browser UI with optional Electron host.",
+      "type": "application"
+    },
+    {
+      "id": "backend",
+      "label": "Backend and Coordination",
+      "description": "FastAPI, owned user operations and durable background work.",
+      "type": "backend"
+    },
+    {
+      "id": "multimodal",
+      "label": "Multimodal Processing",
+      "description": "Major processing responsibilities executed by the backend and its workers; not independent deployed microservices.",
+      "type": "processing"
+    },
+    {
+      "id": "inference",
+      "label": "AI Inference Boundaries",
+      "description": "Configured remote endpoints, local model services and persistent model subprocesses.",
+      "type": "inference"
+    },
+    {
+      "id": "storage",
+      "label": "Data Storage",
+      "description": "Local-default SQL persistence and managed filesystem artifacts.",
+      "type": "storage"
+    },
+    {
+      "id": "external",
+      "label": "External Video Services",
+      "description": "YouTube lecture playback and media/caption/metadata acquisition.",
+      "type": "external"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "learner",
+      "label": "Learner",
+      "description": "Loads lectures, requests explanations, listens and reviews.",
+      "groupId": "user",
+      "type": "actor",
+      "icon": "user-round",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S02",
+        "S04"
+      ]
+    },
+    {
+      "id": "frontend_app",
+      "label": "Accessible Application",
+      "description": "React state-driven navigation, lecture/search, explanation, library, bookmarks, notes, Help and gated Quiz screens; keyboard and voice handlers share application actions.",
+      "groupId": "frontend",
+      "type": "application",
+      "icon": "monitor-play",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S01",
+        "S02",
+        "S08",
+        "S29"
+      ]
+    },
+    {
+      "id": "desktop_runtime",
+      "label": "Electron Host",
+      "description": "Optional desktop container with isolated renderer, explicit permissions and a packaged loopback static frontend server. Does not prove that the backend is packaged or launched with it.",
+      "groupId": "frontend",
+      "type": "runtime",
+      "icon": "monitor",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S09"
+      ]
+    },
+    {
+      "id": "video_player",
+      "label": "Lecture Player",
+      "description": "YouTube IFrame player with seeking and pause ownership; independent explanation audio and first-explanation startup readiness gate.",
+      "groupId": "frontend",
+      "type": "component",
+      "icon": "play",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S04"
+      ]
+    },
+    {
+      "id": "voice_ui",
+      "label": "Voice Interaction",
+      "description": "Microphone turns, command context, clarification and spoken/live-region feedback; shared audio arbitration.",
+      "groupId": "frontend",
+      "type": "component",
+      "icon": "mic",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S07"
+      ]
+    },
+    {
+      "id": "browser_storage",
+      "label": "Browser State and Preferences",
+      "description": "Local/session storage adapters and IndexedDB-backed recovery/attempt storage; preferences and account-token restoration, separate from canonical backend lecture data.",
+      "groupId": "frontend",
+      "type": "storage",
+      "icon": "hard-drive",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S06",
+        "S33"
+      ]
+    },
+    {
+      "id": "api",
+      "label": "FastAPI API",
+      "description": "Validates requests, serves shared lecture/preparation results and audio, mounts private account/history/request routes and separate voice/Ask/Quiz workflows.",
+      "groupId": "backend",
+      "type": "api",
+      "icon": "server",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S10",
+        "S11",
+        "S12",
+        "S15",
+        "S27",
+        "S28"
+      ]
+    },
+    {
+      "id": "accounts",
+      "label": "Accounts and Personal Learning Data",
+      "description": "Loopback-local accounts, bearer session authorization and owner-scoped history, saved explanations, library, playback and voice-note media.",
+      "groupId": "backend",
+      "type": "service",
+      "icon": "shield-check",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S12",
+        "S31"
+      ]
+    },
+    {
+      "id": "jobs",
+      "label": "Video Processing Jobs",
+      "description": "Persistent per-video job admission/join, lease ownership, retry/cancel/resume, detection invocation and context persistence.",
+      "groupId": "backend",
+      "type": "worker",
+      "icon": "list-checks",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S13"
+      ]
+    },
+    {
+      "id": "preparation",
+      "label": "Explanation Preparation",
+      "description": "Durable evidence, text and CPU speech stages with bounded handoffs, priority, checkpoints, ownership fencing and recovery. Different items can occupy different stages concurrently.",
+      "groupId": "backend",
+      "type": "worker",
+      "icon": "workflow",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S14"
+      ]
+    },
+    {
+      "id": "owned_requests",
+      "label": "On-Demand Requests",
+      "description": "Owner-scoped operation identity, active lecture interest/heartbeat, requested timestamps, prioritization and review progress around shared preparation.",
+      "groupId": "backend",
+      "type": "service",
+      "icon": "mouse-pointer-click",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S05",
+        "S15"
+      ]
+    },
+    {
+      "id": "ask_quiz",
+      "label": "Lecture Q&A and Quiz",
+      "description": "Separate transcript-grounded Ask and screened quiz generation; sources derive from backend transcript times. Quiz availability is gated separately on frontend and backend.",
+      "groupId": "backend",
+      "type": "service",
+      "icon": "message-circle-question",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S28",
+        "S29"
+      ]
+    },
+    {
+      "id": "ingestion",
+      "label": "Video Ingestion",
+      "description": "Validates YouTube identity and establishes lecture artifact context before extraction; cache hits can bypass fresh detection.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "video",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S16",
+        "S35"
+      ]
+    },
+    {
+      "id": "transcription",
+      "label": "Audio and Transcription",
+      "description": "YouTube captions first; audio/Whisper fallback in a persistent subprocess produces timestamped transcript records.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "audio-lines",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S17"
+      ]
+    },
+    {
+      "id": "frame_analysis",
+      "label": "Frame and Visual Feature Analysis",
+      "description": "Extracts representative lecture images and educational category/complexity metadata using FFmpeg, OpenCV and CLIP. Optional gesture/interaction-cue analysis is integrated as a partial capability of multimodal visual processing, not a standalone service.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "film",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S18"
+      ],
+      "capabilities": [
+        {
+          "id": "gesture_detection",
+          "label": "Gesture Detection / Instructor Interaction Cues",
+          "description": "Optional gesture/interaction analysis within the multimodal processing path; interactions may contribute to synchronization when enabled. Hand detection is disabled in the inspected orchestrator configuration; accurate interpretation/association is unverified.",
+          "implementationStatus": "partial",
+          "optional": true,
+          "animationEligible": false,
+          "integrationTarget": "synchronization",
+          "evidenceRefs": [
+            "S16",
+            "S19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synchronization",
+      "label": "Multimodal Synchronization",
+      "description": "Associates transcript and keyframes to intervention moments; may optionally incorporate gesture/interaction episodes from visual processing. Does not require successful gesture extraction.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "clock-3",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S16",
+        "S20",
+        "S19"
+      ]
+    },
+    {
+      "id": "visual_analysis",
+      "label": "Visual Understanding",
+      "description": "Per-intervention image analysis through the selected VLM adapter; reusable evidence snapshots and conditional focused readings.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "eye",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S21",
+        "S22"
+      ]
+    },
+    {
+      "id": "evidence_context",
+      "label": "Structured Evidence and Context",
+      "description": "Canonical visual evidence assembly/validation, timestamp-aligned speech and deterministic coverage planning for grounded explanation inputs.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "braces",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S20",
+        "S23",
+        "S24"
+      ]
+    },
+    {
+      "id": "explanation_generation",
+      "label": "Explanation Generation",
+      "description": "Builds bounded evidence/context inputs for brief, explanatory and detailed text; checks completed responses and checkpoints text before speech. Explicit transcript-only targets remain distinct from visual explanations.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "brain-circuit",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S24",
+        "S32"
+      ]
+    },
+    {
+      "id": "speech_generation",
+      "label": "Explanation Text-to-Speech",
+      "description": "Shared local CPU Pocket TTS primary and Kokoro fallback produce explanation audio, with attempt-scoped PCM streaming and completed MP3 artifacts.",
+      "groupId": "multimodal",
+      "type": "processing",
+      "icon": "volume-2",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S26"
+      ]
+    },
+    {
+      "id": "vlm_service",
+      "label": "VLM Inference",
+      "description": "Default adapter targets Qwen/Qwen3-VL-8B-Instruct-FP8 on authenticated Modal/vLLM. A separately selected local Qwen2-VL GGUF path also exists; it is not automatic failover from Modal.",
+      "groupId": "inference",
+      "type": "model_service",
+      "icon": "scan-eye",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S21",
+        "S22"
+      ]
+    },
+    {
+      "id": "explanation_model",
+      "label": "Explanation LLM",
+      "description": "Code default: local Ollama mistral:latest. Explicit alternatives: Modal Ministral-3-14B-Instruct-2512 or Gemini. These are mutually selected providers, not a chain of models.",
+      "groupId": "inference",
+      "type": "model_service",
+      "icon": "brain",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S24",
+        "S25"
+      ]
+    },
+    {
+      "id": "voice_service",
+      "label": "Voice Recognition and Replies",
+      "description": "Persistent CPU faster-whisper and multilingual MiniLM command interpretation plus separate local Piper spoken replies. Distinct from explanation TTS.",
+      "groupId": "inference",
+      "type": "model_service",
+      "icon": "speech",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S27"
+      ]
+    },
+    {
+      "id": "qa_model",
+      "label": "Q&A / Quiz Text Provider",
+      "description": "Independent text-provider selection defaults to Gemini; optional retrieval/reranking/faithfulness models are code-gated capabilities within the Q&A subsystem.",
+      "groupId": "inference",
+      "type": "model_service",
+      "icon": "sparkles",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S28",
+        "S25"
+      ]
+    },
+    {
+      "id": "database",
+      "label": "SQL Persistence",
+      "description": "SQLAlchemy with repository-local SQLite by default; shared videos/transcripts/interventions/explanation metadata/jobs and owner-scoped sessions/requests/history/saves. Configurable database URL does not establish another deployed database.",
+      "groupId": "storage",
+      "type": "database",
+      "icon": "database",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S30"
+      ]
+    },
+    {
+      "id": "artifact_storage",
+      "label": "Artifacts and Managed Media",
+      "description": "Local frames, transcript/evidence JSON, text and MP3 checkpoints, versioned cache manifests, stream journals, saved media and voice recordings. Atomic temporary writes and managed cleanup are implemented.",
+      "groupId": "storage",
+      "type": "filesystem",
+      "icon": "folder",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S16",
+        "S21",
+        "S24",
+        "S26",
+        "S31",
+        "S32"
+      ]
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube Services",
+      "description": "External source for embedded playback, search/metadata, captions and media acquisition. Backend extraction is distinct from browser playback.",
+      "groupId": "external",
+      "type": "external_service",
+      "icon": "video",
+      "implementationStatus": "implemented",
+      "evidenceRefs": [
+        "S04",
+        "S17",
+        "S18",
+        "S35"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e01",
+      "source": "learner",
+      "target": "frontend_app",
+      "dataType": "user_input",
+      "description": "Lecture URL/search, navigation and explanation actions.",
+      "communication": "accessible_DOM_events",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S02",
+        "S04",
+        "S08"
+      ]
+    },
+    {
+      "id": "e02",
+      "source": "desktop_runtime",
+      "target": "frontend_app",
+      "dataType": "frontend_assets",
+      "description": "Electron optionally hosts the React application; packaged assets use a loopback static server.",
+      "communication": "BrowserWindow_and_local_HTTP",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S09"
+      ],
+      "condition": "Electron launch"
+    },
+    {
+      "id": "e03",
+      "source": "frontend_app",
+      "target": "video_player",
+      "dataType": "playback_commands",
+      "description": "Video ID, seek/play/pause and intervention pause ownership.",
+      "communication": "React_props_and_YouTube_IFrame_API",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S04"
+      ]
+    },
+    {
+      "id": "e04",
+      "source": "youtube",
+      "target": "video_player",
+      "dataType": "lecture_stream",
+      "description": "Embedded lecture audio/video, independent of backend processing.",
+      "communication": "YouTube_embed_network",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S04"
+      ]
+    },
+    {
+      "id": "e05",
+      "source": "frontend_app",
+      "target": "api",
+      "dataType": "application_API_requests",
+      "description": "Shared search/processing/preparation and Ask/Quiz JSON requests, plus separately authenticated account/personal HTTP requests. Adapters translate explanation modes and handle JSON, multipart or authorized blob access as appropriate.",
+      "communication": "HTTP_fetch_JSON_multipart_or_authenticated_blob",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S03",
+        "S05",
+        "S06",
+        "S11",
+        "S29"
+      ]
+    },
+    {
+      "id": "e06",
+      "source": "api",
+      "target": "jobs",
+      "dataType": "validated_video_job",
+      "description": "Create or join persistent video work; cached context can bypass fresh detection.",
+      "communication": "internal_call_and_SQL_admission",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S11",
+        "S13"
+      ]
+    },
+    {
+      "id": "e07",
+      "source": "jobs",
+      "target": "ingestion",
+      "dataType": "video_URL_and_ownership",
+      "description": "Invoke process_detection_only for a fresh context job.",
+      "communication": "background_thread_Python_call",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S13",
+        "S16"
+      ],
+      "condition": "valid shared context cache absent"
+    },
+    {
+      "id": "e08",
+      "source": "ingestion",
+      "target": "transcription",
+      "dataType": "video_source",
+      "description": "Start transcription branch; join before intervention synchronization.",
+      "communication": "parallel_thread_to_transcription_subprocess",
+      "executionMode": "parallel",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S16",
+        "S17"
+      ],
+      "forkId": "extraction"
+    },
+    {
+      "id": "e09",
+      "source": "ingestion",
+      "target": "frame_analysis",
+      "dataType": "video_source",
+      "description": "Start keyframe extraction alongside transcription.",
+      "communication": "parallel_thread_Python_call",
+      "executionMode": "parallel",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S16",
+        "S18"
+      ],
+      "forkId": "extraction"
+    },
+    {
+      "id": "e10",
+      "source": "youtube",
+      "target": "transcription",
+      "dataType": "captions_or_audio",
+      "description": "Caption API preferred; unavailable captions lead to audio acquisition and Whisper fallback.",
+      "communication": "Transcript_API_and_yt_dlp_FFmpeg",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S17"
+      ]
+    },
+    {
+      "id": "e11",
+      "source": "youtube",
+      "target": "frame_analysis",
+      "dataType": "video_media_and_metadata",
+      "description": "Resolve stream and decode lecture frames.",
+      "communication": "yt_dlp_and_FFmpeg",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S18"
+      ]
+    },
+    {
+      "id": "e12",
+      "source": "transcription",
+      "target": "synchronization",
+      "dataType": "timestamped_transcript",
+      "description": "Supply transcript entries after extraction join.",
+      "communication": "saved_JSON_and_Python_call",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S16",
+        "S20"
+      ],
+      "mergeId": "context_join"
+    },
+    {
+      "id": "e13",
+      "source": "frame_analysis",
+      "target": "synchronization",
+      "dataType": "keyframes_and_category_metadata",
+      "description": "Supply representative image paths, timestamps and visual feature metadata.",
+      "communication": "saved_JSON_and_Python_call",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S16",
+        "S18",
+        "S20"
+      ],
+      "mergeId": "context_join"
+    },
+    {
+      "id": "e16",
+      "source": "synchronization",
+      "target": "jobs",
+      "dataType": "detected_lecture_context",
+      "description": "Return transcript, keyframe metadata and intervention candidates from detection-only processing.",
+      "communication": "Python_result",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S13",
+        "S16"
+      ]
+    },
+    {
+      "id": "e17",
+      "source": "jobs",
+      "target": "database",
+      "dataType": "job_and_context_records",
+      "description": "Persist owned job state and shared video/transcript/intervention rows in short guarded transactions.",
+      "communication": "SQLAlchemy_transactions",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S13",
+        "S30"
+      ]
+    },
+    {
+      "id": "e18",
+      "source": "jobs",
+      "target": "preparation",
+      "dataType": "intervention_and_mode_jobs",
+      "description": "Schedule preparation after context persistence or reuse of a valid context cache.",
+      "communication": "durable_schedule_internal_call",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S13",
+        "S14"
+      ]
+    },
+    {
+      "id": "e19",
+      "source": "api",
+      "target": "owned_requests",
+      "dataType": "owned_explanation_intent",
+      "description": "Authenticated lecture-session, operation ID, timestamp/depth and review updates.",
+      "communication": "validated_internal_route_call",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S05",
+        "S15",
+        "S12"
+      ]
+    },
+    {
+      "id": "e20",
+      "source": "owned_requests",
+      "target": "preparation",
+      "dataType": "priority_preparation_request",
+      "description": "Resolve or create shared targets and request/retry preparation when context/session conditions permit.",
+      "communication": "internal_call_with_durable_private_link",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S15",
+        "S14"
+      ]
+    },
+    {
+      "id": "e21",
+      "source": "preparation",
+      "target": "visual_analysis",
+      "dataType": "frame_target_and_category_hints",
+      "description": "Evidence worker invokes per-intervention visual extraction unless a current snapshot or complete artifact can be reused.",
+      "communication": "internal_call_under_resource_lock",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S21",
+        "S32"
+      ],
+      "condition": "visual evidence target and no usable snapshot cache"
+    },
+    {
+      "id": "e22",
+      "source": "visual_analysis",
+      "target": "vlm_service",
+      "dataType": "image_and_extraction_request",
+      "description": "Selected adapter performs single-frame inference, with conditional bounded additional readings. Modal uses authenticated HTTP; local provider is a separate selection.",
+      "communication": "authenticated_HTTP_or_selected_local_model_call",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S21",
+        "S22"
+      ]
+    },
+    {
+      "id": "e23",
+      "source": "vlm_service",
+      "target": "visual_analysis",
+      "dataType": "visual_observations_and_completion_metadata",
+      "description": "Return model response for parsing, canonical assembly and usability checks.",
+      "communication": "adapter_result",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S21",
+        "S22",
+        "S23"
+      ]
+    },
+    {
+      "id": "e24",
+      "source": "visual_analysis",
+      "target": "evidence_context",
+      "dataType": "structured_visual_evidence",
+      "description": "Usable canonical observations pass through the evidence checkpoint and text-stage handoff to aligned context/coverage assembly.",
+      "communication": "canonical_JSON_checkpoint_and_stage_handoff",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S21",
+        "S23",
+        "S24"
+      ]
+    },
+    {
+      "id": "e25",
+      "source": "artifact_storage",
+      "target": "evidence_context",
+      "dataType": "saved_transcript_and_visual_snapshot",
+      "description": "Text stage loads lecture captions and may reuse a current evidence snapshot.",
+      "communication": "local_file_reads",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S20",
+        "S24",
+        "S32"
+      ]
+    },
+    {
+      "id": "e26",
+      "source": "evidence_context",
+      "target": "explanation_generation",
+      "dataType": "aligned_evidence_and_coverage",
+      "description": "Provide canonical visual facts, uncertainty, aligned speech and coverage plan to bounded explanation synthesis.",
+      "communication": "internal_Python_objects",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S20",
+        "S23",
+        "S24"
+      ]
+    },
+    {
+      "id": "e27",
+      "source": "explanation_generation",
+      "target": "explanation_model",
+      "dataType": "grounded_explanation_prompt",
+      "description": "Call exactly the configured explanation provider if no reusable matching text checkpoint exists.",
+      "communication": "Ollama_HTTP_or_selected_remote_provider_HTTP_SDK",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S24",
+        "S25",
+        "S32"
+      ]
+    },
+    {
+      "id": "e28",
+      "source": "explanation_model",
+      "target": "explanation_generation",
+      "dataType": "completed_explanation_text",
+      "description": "Accept completed model output; incomplete or unusable responses become classified failures, not successful explanations.",
+      "communication": "provider_response_validation",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S24",
+        "S25"
+      ]
+    },
+    {
+      "id": "e29",
+      "source": "explanation_generation",
+      "target": "speech_generation",
+      "dataType": "checkpointed_explanation_text",
+      "description": "Text stage checkpoints output before the independent speech-stage handoff; audio cache hits bypass generation.",
+      "communication": "bounded_stage_queue_and_shared_CPU_TTS_call",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S24",
+        "S26"
+      ]
+    },
+    {
+      "id": "e30",
+      "source": "speech_generation",
+      "target": "artifact_storage",
+      "dataType": "PCM_stream_and_MP3",
+      "description": "Write attempt-scoped stream events and final validated explanation audio artifacts.",
+      "communication": "guarded_local_filesystem_writes",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S26",
+        "S32"
+      ]
+    },
+    {
+      "id": "e31",
+      "source": "preparation",
+      "target": "artifact_storage",
+      "dataType": "evidence_text_and_cache_checkpoints",
+      "description": "Preparation/service/orchestrator path persists canonical snapshots, text checkpoints and cache manifests; guarded temporary writes prevent late publication.",
+      "communication": "atomic_local_filesystem_operations",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S21",
+        "S24",
+        "S32"
+      ]
+    },
+    {
+      "id": "e32",
+      "source": "preparation",
+      "target": "database",
+      "dataType": "preparation_and_explanation_metadata",
+      "description": "Persist status, ownership, attempts and final explanation records without holding transactions through inference.",
+      "communication": "SQLAlchemy_transactions",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S30"
+      ]
+    },
+    {
+      "id": "e33",
+      "source": "artifact_storage",
+      "target": "api",
+      "dataType": "explanation_audio_or_stream_journal",
+      "description": "Validated complete audio file or current attempt NDJSON supplies response delivery.",
+      "communication": "FileResponse_or_StreamingResponse_file_read",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S11",
+        "S26",
+        "S32"
+      ]
+    },
+    {
+      "id": "e34",
+      "source": "database",
+      "target": "api",
+      "dataType": "lecture_status_and_explanation_records",
+      "description": "Read persisted interventions, job/preparation state and explanation text metadata.",
+      "communication": "SQLAlchemy_queries",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S11",
+        "S30"
+      ]
+    },
+    {
+      "id": "e35",
+      "source": "api",
+      "target": "frontend_app",
+      "dataType": "status_text_audio_or_error",
+      "description": "Polling and retrieval JSON, completed audio and optional NDJSON PCM streams return to frontend adapters. Streams are distinct from ordinary JSON retrieval.",
+      "communication": "HTTP_JSON_MP3_or_NDJSON",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S03",
+        "S11",
+        "S26"
+      ]
+    },
+    {
+      "id": "e36",
+      "source": "frontend_app",
+      "target": "learner",
+      "dataType": "accessible_text_and_audio",
+      "description": "Render explanation text and play HTML Audio/Web Audio according to playback/conversation guards; announce status accessibly.",
+      "communication": "accessible_DOM_HTML_Audio_Web_Audio_live_regions",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S04",
+        "S07",
+        "S08",
+        "S26"
+      ]
+    },
+    {
+      "id": "e37",
+      "source": "frontend_app",
+      "target": "voice_ui",
+      "dataType": "screen_and_action_context",
+      "description": "Scoped handlers and shared media ownership govern voice turns.",
+      "communication": "React_context_and_registered_actions",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S02",
+        "S07"
+      ]
+    },
+    {
+      "id": "e38",
+      "source": "voice_ui",
+      "target": "api",
+      "dataType": "command_WAV_text_and_context",
+      "description": "Send microphone WAV for transcription, text/context for interpretation, or short text for spoken replies.",
+      "communication": "voice_HTTP_multipart_and_JSON",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S07",
+        "S27"
+      ]
+    },
+    {
+      "id": "e39",
+      "source": "api",
+      "target": "voice_service",
+      "dataType": "validated_voice_work",
+      "description": "Route STT/intent work to persistent voice subprocess and reply speech to separate Piper service.",
+      "communication": "framed_subprocess_IPC_or_local_Piper_call",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S27"
+      ]
+    },
+    {
+      "id": "e40",
+      "source": "voice_service",
+      "target": "api",
+      "dataType": "transcript_intent_or_spoken_reply",
+      "description": "Return recognition result, action/clarification or generated Piper audio.",
+      "communication": "worker_result_or_audio_file",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S27"
+      ]
+    },
+    {
+      "id": "e41",
+      "source": "api",
+      "target": "voice_ui",
+      "dataType": "action_clarification_and_reply_audio",
+      "description": "Frontend applies allowed actions and speaks replies, with browser speech/live-region fallback when appropriate.",
+      "communication": "HTTP_JSON_and_audio",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S07",
+        "S27"
+      ]
+    },
+    {
+      "id": "e42",
+      "source": "api",
+      "target": "accounts",
+      "dataType": "authentication_and_private_learning_operations",
+      "description": "Private handlers enforce local transport, session validity and ownership; shared processing routes are a separate boundary.",
+      "communication": "FastAPI_dependencies_and_handlers",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S12",
+        "S31"
+      ]
+    },
+    {
+      "id": "e43",
+      "source": "accounts",
+      "target": "database",
+      "dataType": "owned_account_session_and_learning_records",
+      "description": "Store password hashes, token digests, session state, library/history, saves and note metadata; recheck authorized personal commits.",
+      "communication": "SQLAlchemy_transactions",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S12",
+        "S30",
+        "S31"
+      ]
+    },
+    {
+      "id": "e44",
+      "source": "accounts",
+      "target": "artifact_storage",
+      "dataType": "saved_media_and_recordings",
+      "description": "Publish/read owned media snapshots and recording assets with path containment and managed cleanup.",
+      "communication": "authorized_local_file_operations",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S31"
+      ]
+    },
+    {
+      "id": "e45",
+      "source": "owned_requests",
+      "target": "database",
+      "dataType": "private_request_and_lecture_interest",
+      "description": "Persist operation identity, active interest, review state and links to saved results.",
+      "communication": "SQLAlchemy_transactions",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S15",
+        "S30"
+      ]
+    },
+    {
+      "id": "e46",
+      "source": "frontend_app",
+      "target": "browser_storage",
+      "dataType": "preferences_session_and_local_recovery",
+      "description": "Remember UI preferences and account session; keep browser-local quiz attempts and recovery data.",
+      "communication": "browser_storage_adapters",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S06",
+        "S33"
+      ]
+    },
+    {
+      "id": "e47",
+      "source": "api",
+      "target": "ask_quiz",
+      "dataType": "lecture_question_or_quiz_request",
+      "description": "Dispatch question/current moment or quiz options; quiz requires server feature gate.",
+      "communication": "FastAPI_internal_service_call",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S11",
+        "S28",
+        "S29"
+      ]
+    },
+    {
+      "id": "e48",
+      "source": "database",
+      "target": "ask_quiz",
+      "dataType": "lecture_transcript_and_moment_metadata",
+      "description": "Load available transcript and optional current intervention context for grounded generation.",
+      "communication": "SQLAlchemy_queries",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S28",
+        "S11"
+      ]
+    },
+    {
+      "id": "e49",
+      "source": "artifact_storage",
+      "target": "ask_quiz",
+      "dataType": "transcript_and_visual_context_files",
+      "description": "Transcript/file fallback and optional reliable moment analysis supply evidence; Ask does not launch a fresh visual analysis for every question.",
+      "communication": "local_file_reads",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S28",
+        "S11"
+      ]
+    },
+    {
+      "id": "e50",
+      "source": "ask_quiz",
+      "target": "qa_model",
+      "dataType": "bounded_transcript_grounded_prompt",
+      "description": "Generate when needed using independent selected text provider; deterministic insufficient-context paths can skip inference.",
+      "communication": "selected_provider_SDK_or_HTTP",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S28"
+      ]
+    },
+    {
+      "id": "e51",
+      "source": "qa_model",
+      "target": "ask_quiz",
+      "dataType": "answer_or_candidate_questions",
+      "description": "Returned output is validated/screened and source times are assigned by backend code.",
+      "communication": "provider_result",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S28"
+      ]
+    },
+    {
+      "id": "e52",
+      "source": "ask_quiz",
+      "target": "api",
+      "dataType": "grounded_answer_or_screened_quiz",
+      "description": "Return answer/sources, complete/partial/insufficient-material quiz, or typed provider/service error.",
+      "communication": "validated_service_result",
+      "executionMode": "synchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S28",
+        "S11"
+      ]
+    },
+    {
+      "id": "e53",
+      "source": "ingestion",
+      "target": "artifact_storage",
+      "dataType": "lecture_extraction_artifacts",
+      "description": "Detection orchestration creates per-video directories and saves transcript JSON, keyframes and optional interaction artifacts.",
+      "communication": "orchestrated_local_file_writes",
+      "executionMode": "asynchronous",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S16",
+        "S17",
+        "S18",
+        "S19"
+      ]
+    },
+    {
+      "id": "e54",
+      "source": "preparation",
+      "target": "explanation_generation",
+      "dataType": "explicit_transcript_only_context",
+      "description": "Requested-timestamp frame acquisition can mark a target transcript-only when media is unavailable; nonempty saved speech is required. Failed ordinary visual extraction is not silently converted to successful visual explanation.",
+      "communication": "explicit_evidence_kind_branch_and_text_stage_call",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S24",
+        "S32"
+      ],
+      "condition": "evidence_kind is transcript and transcript context is usable"
+    },
+    {
+      "id": "e55",
+      "source": "artifact_storage",
+      "target": "preparation",
+      "dataType": "reusable_snapshot_text_or_audio",
+      "description": "Reuse each current checkpoint independently; a text-only checkpoint resumes speech, while a complete current text/MP3 pair can be delivered without inference.",
+      "communication": "cache_manifest_and_file_validation",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S14",
+        "S32"
+      ]
+    },
+    {
+      "id": "e56",
+      "source": "api",
+      "target": "youtube",
+      "dataType": "lecture_search_or_metadata_query",
+      "description": "Search/metadata handlers access configured YouTube services; failures are mapped to explicit API errors.",
+      "communication": "provider_HTTP_or_yt_dlp",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S11",
+        "S35"
+      ]
+    },
+    {
+      "id": "e57",
+      "source": "owned_requests",
+      "target": "jobs",
+      "dataType": "existing_job_lifecycle_action",
+      "description": "Resume an existing cancelled/cancelling lecture job for an owned request, or cancel shared processing when no interested lecture sessions remain. This service does not create a first video job.",
+      "communication": "processing_resume_or_cancel_internal_call",
+      "executionMode": "conditional",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S15",
+        "S13"
+      ],
+      "condition": "existing job requires resume, or no interested sessions remain"
+    },
+    {
+      "id": "e58",
+      "source": "jobs",
+      "target": "owned_requests",
+      "dataType": "lecture_context_ready_notification",
+      "description": "Context-ready callback reconciles waiting owned requests before scheduling preparation modes; durable maintenance can retry reconciliation.",
+      "communication": "context_ready_callback_to_source_ready",
+      "executionMode": "event_driven",
+      "verificationStatus": "code_supported",
+      "evidenceRefs": [
+        "S10",
+        "S13",
+        "S15"
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "video_context",
+      "label": "Prepare Lecture Context",
+      "description": "Validate video, fork transcription and keyframe analysis, join, select intervention moments, persist and queue preparation. Optional gesture/interaction-cue analysis is an embedded partial capability of visual processing and may conditionally inform synchronization; it is not independently animated.",
+      "nodeIds": [
+        "learner",
+        "frontend_app",
+        "api",
+        "jobs",
+        "ingestion",
+        "youtube",
+        "transcription",
+        "frame_analysis",
+        "synchronization",
+        "database",
+        "artifact_storage",
+        "preparation"
+      ],
+      "edgeIds": [
+        "e01",
+        "e05",
+        "e06",
+        "e07",
+        "e08",
+        "e09",
+        "e10",
+        "e11",
+        "e12",
+        "e13",
+        "e16",
+        "e17",
+        "e18",
+        "e53"
+      ],
+      "trigger": "Valid new lecture or invalid context cache",
+      "status": "implemented",
+      "parallelBranches": [
+        [
+          "e08",
+          "e10",
+          "e12"
+        ],
+        [
+          "e09",
+          "e11",
+          "e13"
+        ]
+      ],
+      "mergeNodeIds": [
+        "synchronization"
+      ],
+      "verificationStatus": "code_supported_not_runtime_verified"
+    },
+    {
+      "id": "visual_explanation",
+      "label": "Prepare Visual Explanation",
+      "description": "Evidence worker calls selected VLM, validates canonical evidence, aligns transcript and hands off to explanation generation. Current evidence cache can skip VLM.",
+      "nodeIds": [
+        "preparation",
+        "visual_analysis",
+        "vlm_service",
+        "evidence_context",
+        "artifact_storage",
+        "explanation_generation",
+        "explanation_model",
+        "speech_generation",
+        "database"
+      ],
+      "edgeIds": [
+        "e21",
+        "e22",
+        "e23",
+        "e24",
+        "e25",
+        "e26",
+        "e27",
+        "e28",
+        "e29",
+        "e31",
+        "e32"
+      ],
+      "trigger": "Admitted visual target requiring preparation",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified",
+      "conditions": [
+        "Unusable visual evidence prevents a strict visual explanation.",
+        "Only the selected inference provider executes.",
+        "Different interventions may occupy evidence, text and speech stages concurrently."
+      ]
+    },
+    {
+      "id": "on_demand",
+      "label": "Learner-Requested Explanation",
+      "description": "Authenticated request with active lecture session links private intent to shared preparation. Initial lecture processing must already exist; requests can wait for its context-ready callback or resume an existing cancelled job. Requested timestamp may require fresh frame acquisition.",
+      "nodeIds": [
+        "learner",
+        "frontend_app",
+        "api",
+        "owned_requests",
+        "jobs",
+        "database",
+        "preparation",
+        "visual_analysis",
+        "explanation_generation"
+      ],
+      "edgeIds": [
+        "e01",
+        "e05",
+        "e19",
+        "e20",
+        "e45",
+        "e57",
+        "e58",
+        "e21",
+        "e54"
+      ],
+      "trigger": "Explanation request or retry within an owned lecture session",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified",
+      "alternativePaths": [
+        [
+          "e19",
+          "e20",
+          "e21"
+        ],
+        [
+          "e19",
+          "e57",
+          "e58",
+          "e20"
+        ],
+        [
+          "e19",
+          "e20",
+          "e54"
+        ]
+      ]
+    },
+    {
+      "id": "speech_delivery",
+      "label": "Deliver Explanation Text and Speech",
+      "description": "Checkpoint text, synthesize speech, publish current artifacts and respond with status/text, completed audio or current-attempt NDJSON. Frontend media guards control playback.",
+      "nodeIds": [
+        "explanation_generation",
+        "speech_generation",
+        "artifact_storage",
+        "preparation",
+        "database",
+        "api",
+        "frontend_app",
+        "learner"
+      ],
+      "edgeIds": [
+        "e29",
+        "e30",
+        "e31",
+        "e32",
+        "e33",
+        "e34",
+        "e35",
+        "e36"
+      ],
+      "trigger": "Completed text and audio generation or validated reusable artifacts",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified",
+      "deliveryAlternatives": [
+        "completed MP3 through FileResponse",
+        "current audio attempt through NDJSON PCM stream"
+      ]
+    },
+    {
+      "id": "cache_reuse",
+      "label": "Reuse Current Checkpoints",
+      "description": "Context, visual evidence, text and completed text/audio caches have different validation gates. Reuse resumes at the owning stage rather than declaring every cache hit complete.",
+      "nodeIds": [
+        "api",
+        "jobs",
+        "preparation",
+        "artifact_storage",
+        "database",
+        "frontend_app"
+      ],
+      "edgeIds": [
+        "e06",
+        "e18",
+        "e55",
+        "e33",
+        "e34",
+        "e35"
+      ],
+      "trigger": "Current compatible cached artifact exists",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified"
+    },
+    {
+      "id": "voice_command",
+      "label": "Voice Command and Reply",
+      "description": "Capture a user turn, transcribe, interpret with screen context, apply permitted action and deliver a separate Piper/browser/live-region reply.",
+      "nodeIds": [
+        "frontend_app",
+        "voice_ui",
+        "api",
+        "voice_service"
+      ],
+      "edgeIds": [
+        "e37",
+        "e38",
+        "e39",
+        "e40",
+        "e41"
+      ],
+      "trigger": "Voice feature enabled and microphone turn explicitly requested",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified"
+    },
+    {
+      "id": "personal_learning",
+      "label": "Account and Saved Learning Data",
+      "description": "Local authenticated requests access owner-scoped records and saved media; browser recovery/preferences remain a separate persistence scope.",
+      "nodeIds": [
+        "frontend_app",
+        "api",
+        "accounts",
+        "database",
+        "artifact_storage",
+        "browser_storage"
+      ],
+      "edgeIds": [
+        "e05",
+        "e42",
+        "e43",
+        "e44",
+        "e46",
+        "e35"
+      ],
+      "trigger": "Sign-in, library/history/save/bookmark/voice-note action",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified"
+    },
+    {
+      "id": "ask_or_quiz",
+      "label": "Separate Lecture Q&A / Quiz",
+      "description": "Load transcript and optional moment evidence, conditionally call independent text provider, validate/screen and return answer sources or quiz. This does not force the main visual explanation pipeline to rerun.",
+      "nodeIds": [
+        "frontend_app",
+        "api",
+        "ask_quiz",
+        "database",
+        "artifact_storage",
+        "qa_model"
+      ],
+      "edgeIds": [
+        "e05",
+        "e47",
+        "e48",
+        "e49",
+        "e50",
+        "e51",
+        "e52",
+        "e35"
+      ],
+      "trigger": "Ask request or Quiz enabled on both sides and requested",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified",
+      "conditions": [
+        "Insufficient context can return without model generation.",
+        "Quiz screening does not establish educational correctness."
+      ]
+    },
+    {
+      "id": "lecture_playback",
+      "label": "Independent Lecture Playback",
+      "description": "Optional Electron hosts frontend; application controls embedded YouTube player while the lecture stream comes directly from YouTube. Startup explanation readiness and media guards affect playback.",
+      "nodeIds": [
+        "desktop_runtime",
+        "frontend_app",
+        "video_player",
+        "youtube"
+      ],
+      "edgeIds": [
+        "e02",
+        "e03",
+        "e04"
+      ],
+      "trigger": "Lecture screen opened and learner playback allowed",
+      "status": "implemented",
+      "verificationStatus": "code_supported_not_runtime_verified"
+    }
+  ],
+  "animationPhases": [
+    {
+      "id": "phase_access",
+      "label": "Open Application and Lecture",
+      "description": "Show frontend, optional Electron host and independent YouTube player. User submits video selection through the API.",
+      "nodeIds": [
+        "learner",
+        "desktop_runtime",
+        "frontend_app",
+        "video_player",
+        "youtube",
+        "api"
+      ],
+      "edgeIds": [
+        "e01",
+        "e02",
+        "e03",
+        "e04",
+        "e05"
+      ],
+      "flowIds": [
+        "video_context",
+        "lecture_playback"
+      ],
+      "executionType": "conditional",
+      "trigger": "Application and lecture opened; Electron edge only for desktop runtime",
+      "nextPhaseIds": [
+        "phase_admission",
+        "phase_cache"
+      ]
+    },
+    {
+      "id": "phase_admission",
+      "label": "Admit Context Processing",
+      "description": "Join/create durable video job and invoke detection-only processing on a context cache miss.",
+      "nodeIds": [
+        "api",
+        "jobs",
+        "ingestion"
+      ],
+      "edgeIds": [
+        "e06",
+        "e07"
+      ],
+      "flowIds": [
+        "video_context"
+      ],
+      "executionType": "sequential",
+      "trigger": "Valid input and no reusable context",
+      "nextPhaseIds": [
+        "phase_extract"
+      ]
+    },
+    {
+      "id": "phase_extract",
+      "label": "Extract Speech and Visual Context",
+      "description": "Animate two extraction branches concurrently. Caption success skips Whisper; caption failure uses its audio fallback. Gesture scan is not a mandatory parallel stream.",
+      "nodeIds": [
+        "ingestion",
+        "youtube",
+        "transcription",
+        "frame_analysis",
+        "artifact_storage"
+      ],
+      "edgeIds": [
+        "e08",
+        "e09",
+        "e10",
+        "e11",
+        "e53"
+      ],
+      "flowIds": [
+        "video_context"
+      ],
+      "executionType": "parallel",
+      "trigger": "Fresh extraction started",
+      "forkId": "extraction",
+      "parallelEdgeSets": [
+        [
+          "e08",
+          "e10"
+        ],
+        [
+          "e09",
+          "e11"
+        ]
+      ],
+      "nextPhaseIds": [
+        "phase_context_join"
+      ]
+    },
+    {
+      "id": "phase_context_join",
+      "label": "Synchronize and Persist Lecture Context",
+      "description": "Merge completed extraction, identify moments, persist shared lecture context and schedule explanation modes. Optional gesture/interaction analysis is documented within visual processing but is not a separate animated node or confirmed-flow pathway.",
+      "nodeIds": [
+        "transcription",
+        "frame_analysis",
+        "synchronization",
+        "jobs",
+        "database",
+        "preparation"
+      ],
+      "edgeIds": [
+        "e12",
+        "e13",
+        "e16",
+        "e17",
+        "e18"
+      ],
+      "flowIds": [
+        "video_context"
+      ],
+      "executionType": "sequential",
+      "trigger": "Both extraction threads joined successfully",
+      "mergeNodeIds": [
+        "synchronization"
+      ],
+      "inactiveNodeIds": [],
+      "nextPhaseIds": [
+        "phase_visual",
+        "phase_cache"
+      ]
+    },
+    {
+      "id": "phase_request",
+      "label": "Prioritize Learner Request",
+      "description": "An owned active lecture session links an on-demand request to shared work. Initial processing must already exist; the request may resume its cancelled job or await context, enter visual preparation, or take the explicitly transcript-only alternative.",
+      "nodeIds": [
+        "frontend_app",
+        "api",
+        "owned_requests",
+        "jobs",
+        "database",
+        "preparation"
+      ],
+      "edgeIds": [
+        "e05",
+        "e19",
+        "e20",
+        "e45",
+        "e57",
+        "e58"
+      ],
+      "flowIds": [
+        "on_demand"
+      ],
+      "executionType": "conditional",
+      "trigger": "Authenticated learner requests explanation or retry after initial lecture processing has started",
+      "nextPhaseIds": [
+        "phase_visual",
+        "phase_transcript_only",
+        "phase_cache"
+      ]
+    },
+    {
+      "id": "phase_visual",
+      "label": "Understand the Selected Visual",
+      "description": "Selected VLM analyzes the image; usable canonical evidence moves through a checkpoint/handoff. Failed extraction must not continue as a successful visual explanation.",
+      "nodeIds": [
+        "preparation",
+        "visual_analysis",
+        "vlm_service",
+        "evidence_context",
+        "artifact_storage"
+      ],
+      "edgeIds": [
+        "e21",
+        "e22",
+        "e23",
+        "e24",
+        "e31"
+      ],
+      "flowIds": [
+        "visual_explanation"
+      ],
+      "executionType": "conditional",
+      "trigger": "Visual target, no reusable evidence, provider ready and extraction usable",
+      "nextPhaseIds": [
+        "phase_context_and_text"
+      ]
+    },
+    {
+      "id": "phase_context_and_text",
+      "label": "Ground and Generate Explanation",
+      "description": "Combine evidence with aligned saved speech and coverage; selected LLM returns completed text. Do not activate multiple alternative explanation providers together.",
+      "nodeIds": [
+        "artifact_storage",
+        "evidence_context",
+        "explanation_generation",
+        "explanation_model",
+        "preparation"
+      ],
+      "edgeIds": [
+        "e25",
+        "e26",
+        "e27",
+        "e28",
+        "e31"
+      ],
+      "flowIds": [
+        "visual_explanation"
+      ],
+      "executionType": "sequential",
+      "trigger": "Usable evidence or reused snapshot; matching text checkpoint absent",
+      "nextPhaseIds": [
+        "phase_speech"
+      ]
+    },
+    {
+      "id": "phase_transcript_only",
+      "label": "Use Explicit Transcript Context",
+      "description": "Requested frame unavailable or target explicitly transcript-only: use saved speech without claiming visual analysis. Ordinary failed visual requests do not automatically take this branch.",
+      "nodeIds": [
+        "preparation",
+        "explanation_generation",
+        "explanation_model"
+      ],
+      "edgeIds": [
+        "e54",
+        "e27",
+        "e28"
+      ],
+      "flowIds": [
+        "on_demand",
+        "visual_explanation"
+      ],
+      "executionType": "conditional",
+      "trigger": "Explicit transcript evidence kind and nonempty transcript context",
+      "nextPhaseIds": [
+        "phase_speech"
+      ]
+    },
+    {
+      "id": "phase_speech",
+      "label": "Synthesize Explanation Audio",
+      "description": "Text checkpoint enters CPU speech. Across different interventions the evidence, text and speech stages can overlap; per-item stage dependency remains ordered.",
+      "nodeIds": [
+        "explanation_generation",
+        "speech_generation",
+        "artifact_storage",
+        "preparation",
+        "database"
+      ],
+      "edgeIds": [
+        "e29",
+        "e30",
+        "e31",
+        "e32"
+      ],
+      "flowIds": [
+        "speech_delivery"
+      ],
+      "executionType": "asynchronous",
+      "trigger": "Completed or reusable text; missing/invalid audio",
+      "overlapScope": "different preparation items in different stages",
+      "nextPhaseIds": [
+        "phase_delivery"
+      ]
+    },
+    {
+      "id": "phase_cache",
+      "label": "Reuse Valid Context or Checkpoints",
+      "description": "Choose the relevant cache level: context reuse schedules preparation; evidence reuse resumes text; text reuse resumes speech; complete text/audio reuse goes to delivery.",
+      "nodeIds": [
+        "api",
+        "jobs",
+        "preparation",
+        "artifact_storage",
+        "database"
+      ],
+      "edgeIds": [
+        "e06",
+        "e18",
+        "e55",
+        "e34"
+      ],
+      "flowIds": [
+        "cache_reuse"
+      ],
+      "executionType": "conditional",
+      "trigger": "Cache is current, compatible and validated",
+      "nextPhaseIds": [
+        "phase_visual",
+        "phase_context_and_text",
+        "phase_speech",
+        "phase_delivery"
+      ]
+    },
+    {
+      "id": "phase_delivery",
+      "label": "Deliver Accessible Explanation",
+      "description": "Retrieve JSON and completed audio, or subscribe to current-attempt PCM NDJSON. Frontend displays text and plays audio only under valid media/conversation guards.",
+      "nodeIds": [
+        "database",
+        "artifact_storage",
+        "api",
+        "frontend_app",
+        "learner"
+      ],
+      "edgeIds": [
+        "e33",
+        "e34",
+        "e35",
+        "e36"
+      ],
+      "flowIds": [
+        "speech_delivery",
+        "cache_reuse"
+      ],
+      "executionType": "asynchronous",
+      "trigger": "Current stream attempt or complete validated explanation available",
+      "alternativeMechanisms": [
+        "JSON plus MP3",
+        "NDJSON text/PCM events"
+      ]
+    },
+    {
+      "id": "phase_voice",
+      "label": "Handle Optional Voice Turn",
+      "description": "Voice recognition/interpretation and Piper reply use their own local path; actions then reuse existing application behavior.",
+      "nodeIds": [
+        "frontend_app",
+        "voice_ui",
+        "api",
+        "voice_service"
+      ],
+      "edgeIds": [
+        "e37",
+        "e38",
+        "e39",
+        "e40",
+        "e41"
+      ],
+      "flowIds": [
+        "voice_command"
+      ],
+      "executionType": "conditional",
+      "trigger": "Enabled voice feature and explicit microphone turn"
+    },
+    {
+      "id": "phase_personal",
+      "label": "Access Owned Learning Data",
+      "description": "Apply local account authorization before accessing personal database/media records; browser recovery and preferences are a separate store.",
+      "nodeIds": [
+        "frontend_app",
+        "api",
+        "accounts",
+        "database",
+        "artifact_storage",
+        "browser_storage"
+      ],
+      "edgeIds": [
+        "e42",
+        "e43",
+        "e44",
+        "e46"
+      ],
+      "flowIds": [
+        "personal_learning"
+      ],
+      "executionType": "conditional",
+      "trigger": "Authorized account/save/history/note request"
+    },
+    {
+      "id": "phase_ask_quiz",
+      "label": "Answer or Generate Practice",
+      "description": "Use available lecture evidence, optional independent provider generation, validation/screening and API delivery. Quiz has separate client/server gates.",
+      "nodeIds": [
+        "api",
+        "ask_quiz",
+        "database",
+        "artifact_storage",
+        "qa_model",
+        "frontend_app"
+      ],
+      "edgeIds": [
+        "e47",
+        "e48",
+        "e49",
+        "e50",
+        "e51",
+        "e52",
+        "e35"
+      ],
+      "flowIds": [
+        "ask_or_quiz"
+      ],
+      "executionType": "conditional",
+      "trigger": "Ask or permitted Quiz request; model edges only when generation needed"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+/* WORLD 2: SOUND. Every slide is described aloud, like an audio description track. */
+@font-face{font-family:"Gloock";src:url(../fonts/gloock-latin-400-normal.woff2)}
+@font-face{font-family:"Courier Prime";font-weight:400;src:url(../fonts/courier-prime-latin-400-normal.woff2)}
+@font-face{font-family:"Courier Prime";font-weight:700;src:url(../fonts/courier-prime-latin-700-normal.woff2)}
+:root{--bg:#F6F1E4;--card:#FFFDF6;--pale:#EFE8D4;--soft:#3d3b52;--line:#d4cab0;--rule:#b3a77f;--mono:"Courier Prime","Consolas",monospace}
+#stage{background:radial-gradient(1400px 800px at 30% 0%,#fbf7ec,#F6F1E4 60%,#efe8d4)}
+h1,h2{font-family:Gloock,Georgia,serif;font-weight:400;letter-spacing:-.01em}
+h2{color:var(--ink);font-size:72px}
+.ind{color:var(--ink);background:linear-gradient(transparent 56%,#FFD84A 56% 92%,transparent 92%);padding:0 6px;margin:0 -6px}
+h3,.sh{font-weight:700}
+.stat .n,.member h3{font-family:Gloock,Georgia,serif;font-weight:400}
+.stat .n{letter-spacing:-.02em}
+.reg,.tg,.st,.sup .k,.demo .note{font-family:var(--mono)}
+.dark{background:#14172B}
+#s1 .mark{opacity:.06}
+#s1 h1{font-size:68px;letter-spacing:-.01em}
+.card,.demo,.dbar{border-radius:4px}
+.thanks{border-radius:4px}
+.ad{left:0;right:0;bottom:0;height:88px;background:#14172B;color:#F6F1E4;display:flex;align-items:center;gap:26px;padding:0 60px 0 120px;border-top:4px solid #FFD84A}
+.ad .tag{font:700 19px var(--mono);background:#FFD84A;color:#14172B;padding:7px 14px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.ad .tc{font:400 24px var(--mono);color:#8ef0e0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ad .tx{font:400 23px/1.3 var(--mono);flex:1;min-width:0;height:66px;display:flex;align-items:center;overflow:hidden}
+.ad .wv{display:flex;align-items:center;gap:4px;height:48px;flex:none}
+.ad .wv i{width:5px;height:20%;background:#FFD84A;animation:wvb 1s ease-in-out infinite}
+@keyframes wvb{50%{height:100%}}
+.node .box{fill:#FFFDF6;stroke:#14172B;stroke-width:1.8;rx:3}
+.node .tile{rx:3}
+.node.lit .box{fill:#FFE9A8;stroke-width:2.6;filter:none}
+.edge{stroke:#14172B}.arrow{fill:#14172B}
+.packet{fill:#362CAC;stroke:#F6F1E4}
+.band{fill:rgba(255,255,255,.5);stroke:var(--line)}
+.legend i{border-radius:2px}
+.chips button.on,.ctrls button.play{background:#14172B;border-color:#14172B}
+.ctrls button.play:hover{background:#2b2f4a}
+#progress{background:#14172B}
+@media (prefers-reduced-motion:reduce){.ad .wv i{animation:none;height:60%}}

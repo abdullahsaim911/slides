@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synapse — design concepts</title>
+<style>
+@font-face{font-family:"Atkinson";font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+@font-face{font-family:"Atkinson";font-weight:700;src:url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow:auto}body{font-family:Atkinson,system-ui,sans-serif;background:#ECEEFC;color:#14172B;padding:56px 72px}
+h1{font-size:44px;letter-spacing:-.02em}
+p.l{font-size:20px;color:#373E5C;margin-top:10px;max-width:900px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:36px}
+a.c{display:block;text-decoration:none;color:inherit;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #C3C9E6;transition:transform .2s,border-color .2s}
+a.c:hover{transform:translateY(-4px);border-color:#362CAC}
+.th{aspect-ratio:16/9;overflow:hidden;position:relative;background:#ddd}
+.th iframe{width:1920px;height:1080px;border:0;transform-origin:0 0;pointer-events:none;position:absolute;left:0;top:0}
+.t{padding:16px 20px 20px}.t b{font-size:24px;display:block}.t span{font-size:17px;color:#373E5C;line-height:1.45;display:block;margin-top:6px}
+.k{margin-top:30px;font-size:17px;color:#373E5C}
+</style></head><body>
+<h1>Synapse — design concepts</h1>
+<p class="l">Four complete visual worlds built from the same real content. Each has three live slides: the title, the problem and the animated system architecture. Open one, press → to step through, F for fullscreen.</p>
+<div class="grid">
+ <a class="c" href="a-catalog.html"><div class="th"><iframe src="a-catalog.html?shot#1" tabindex="-1"></iframe></div><div class="t"><b>A &middot; The Catalog Drawer</b><span>Each slide is a typed library index card with ruled lines, a rod hole and coloured divider tabs. Warm, tactile, bookish.</span></div></a>
+ <a class="c" href="b-script.html"><div class="th"><iframe src="b-script.html?shot#1" tabindex="-1"></iframe></div><div class="t"><b>B &middot; The Audio Description Script</b><span>The deck as the script that describes a lecture to a blind listener: timecodes, slug lines, highlighter, a screenplay page.</span></div></a>
+ <a class="c" href="c-blueprint.html"><div class="th"><iframe src="c-blueprint.html?shot#1" tabindex="-1"></iframe></div><div class="t"><b>C &middot; The Blueprint Sheet</b><span>An engineering drawing: cyanotype grid, sheet border with zone references, title block, dimension lines and callouts.</span></div></a>
+ <a class="c" href="d-poster.html"><div class="th"><iframe src="d-poster.html?shot#1" tabindex="-1"></iframe></div><div class="t"><b>D &middot; The Colour-Block Poster</b><span>A bold Swiss-style poster: huge cropped type, flat colour blocks, solid shapes and hard edges. Loud and confident.</span></div></a>
+</div>
+<p class="k">Keys: → or Space next &middot; ← back &middot; P auto-play the architecture &middot; F fullscreen.</p>
+<script>function fit(){document.querySelectorAll('.th').forEach(t=>{const f=t.querySelector('iframe');f.style.transform='scale('+(t.clientWidth/1920)+')'})}addEventListener('resize',fit);fit();</script>
+</body></html>

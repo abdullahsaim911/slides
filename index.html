@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synapse — Final Year Project</title>
+<link rel="icon" href="Assets/web/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div id="viewport"><div id="stage">
+
+<!-- 1 TITLE -->
+<section class="slide dark" id="s1" aria-label="Title">
+  <img class="mark" src="Assets/logos/symbol-white.svg" alt="" aria-hidden="true">
+  <div class="t-wrap">
+    <img data-r class="logo" src="Assets/logos/logo-horizontal-white.svg" alt="Synapse">
+    <h1 data-r style="--d:150">Multimodal AI accessibility for online STEM education of blind learners</h1>
+    <p data-r style="--d:300" class="t-meta"><span>Final Year Project</span><span>COMSATS University Islamabad, Lahore Campus</span><span>Session 2023–2027</span></p>
+  </div>
+</section>
+
+<!-- 2 TEAM -->
+<section class="slide" id="s2">
+  <h2 data-r>Project team</h2>
+  <p data-r style="--d:80" class="lead">BS Computer Science · Department of Computer Science</p>
+  <div class="team">
+    <div class="member" data-r style="--d:180"><h3>Hafiz Abdullah Saim</h3><div class="reg">SP23-BCS-050</div><div class="role">Group leader</div></div>
+    <div class="member" data-r style="--d:260"><h3>Maha Khalid</h3><div class="reg">SP23-BCS-065</div><div class="role">Team member</div></div>
+    <div class="member" data-r style="--d:340"><h3>Memoona Shahid</h3><div class="reg">SP23-BCS-071</div><div class="role">Team member</div></div>
+  </div>
+  <div class="sup" data-r style="--d:480"><span class="k">Supervisor</span><span class="v">Mr. Amaid Zia</span><span class="r">Lecturer, COMSATS University Islamabad, Lahore Campus</span></div>
+</section>
+
+<!-- 3 PROBLEM -->
+<section class="slide" id="s3">
+  <h2 data-r>Problem statement</h2>
+  <p data-r style="--d:80" class="lead">STEM lectures are built on what learners can see. For blind and low-vision students, much of that content never reaches them.</p>
+  <div class="stats">
+    <div class="stat" data-r style="--d:200"><div class="n"><span data-count="285">285</span><small>million</small></div><p>people worldwide live with a visual impairment</p></div>
+    <div class="stat" data-r style="--d:300"><div class="n"><span data-count="39">39</span><small>million</small></div><p>of them are completely blind</p></div>
+    <div class="stat" data-r style="--d:400"><div class="n"><span data-count="70">70</span><small>%</small></div><p>of STEM content becomes inaccessible when visuals are not converted</p></div>
+  </div>
+  <div class="src" data-r style="--d:450">Sources: WHO estimates (Pascolini &amp; Mariotti, 2012); Human-AI Systems for Video Accessibility.</div>
+  <h3 class="sub" data-r style="--d:520">Why current tools fall short</h3>
+  <div class="trio">
+    <div data-r style="--d:580"><i data-ic="monitor-x"></i><h4>Screen readers stop at text</h4><p>JAWS and NVDA cannot interpret diagrams, equations or graphs shown in video.</p></div>
+    <div data-r style="--d:650"><i data-ic="captions"></i><h4>Captions miss the visuals</h4><p>Speech becomes text, but what is drawn, written and pointed at is lost.</p></div>
+    <div data-r style="--d:720"><i data-ic="puzzle"></i><h4>Tools work in isolation</h4><p>No single system joins speech, visuals, math and gestures into one explanation.</p></div>
+  </div>
+</section>
+
+<!-- 4 SOLUTION -->
+<section class="slide" id="s4">
+  <h2 data-r>Proposed solution</h2>
+  <p data-r style="--d:80" class="lead">Synapse brings speech recognition, computer vision, gesture understanding and a large language model together, then speaks a context-aware explanation to the learner.</p>
+  <ol class="steps">
+    <li data-r style="--d:200"><span class="dot"><i data-ic="video"></i></span><h3>Lecture video</h3><p>Any YouTube STEM lecture</p></li>
+    <li data-r style="--d:290"><span class="dot"><i data-ic="layers"></i></span><h3>Understand</h3><p>Speech, frames and instructor gestures analysed together</p></li>
+    <li data-r style="--d:380"><span class="dot"><i data-ic="braces"></i></span><h3>Ground</h3><p>Observations become structured visual evidence</p></li>
+    <li data-r style="--d:470"><span class="dot"><i data-ic="brain"></i></span><h3>Explain</h3><p>An LLM writes the explanation at the chosen depth</p></li>
+    <li data-r style="--d:560"><span class="dot"><i data-ic="volume"></i></span><h3>Speak</h3><p>Text-to-speech delivers it to the learner</p></li>
+  </ol>
+  <ul class="inline-feats" data-r style="--d:700">
+    <li><i data-ic="mic"></i>Voice-controlled</li>
+    <li><i data-ic="keyboard"></i>Full keyboard navigation</li>
+    <li><i data-ic="sliders"></i>Adjustable detail level</li>
+    <li><i data-ic="library"></i>Personal explanation library</li>
+  </ul>
+</section>
+
+<!-- 5 WHAT IS SYNAPSE -->
+<section class="slide" id="s5">
+  <h2 data-r>What is Synapse?</h2>
+  <p data-r style="--d:80" class="lead">An accessibility-first lecture companion. It turns the visual half of an online STEM lecture into spoken, grounded explanations, so blind and low-vision learners can follow at the same pace as their classmates.</p>
+  <div class="s5grid">
+    <div class="feats">
+      <div data-r style="--d:200"><i data-ic="scan"></i><h3>Lecture understanding</h3><p>Transcript, frames and instructor cues analysed together</p></div>
+      <div data-r style="--d:260"><i data-ic="shield-check"></i><h3>Grounded explanations</h3><p>Built from visual evidence, not guesses</p></div>
+      <div data-r style="--d:320"><i data-ic="sliders"></i><h3>Adjustable depth</h3><p>Brief, standard or detailed</p></div>
+      <div data-r style="--d:380"><i data-ic="mic"></i><h3>Voice and keyboard</h3><p>Hands-free commands, no mouse needed</p></div>
+      <div data-r style="--d:440"><i data-ic="library"></i><h3>Personal library</h3><p>Saved explanations, bookmarks and notes</p></div>
+      <div data-r style="--d:500"><i data-ic="message"></i><h3>Lecture Q&amp;A</h3><p>Questions answered from the lecture itself</p></div>
+    </div>
+    <div class="demo" data-r="rt" style="--d:300">
+      <div class="hd">Illustrative explanation</div>
+      <div class="vid">
+        <svg viewBox="0 0 560 210" aria-hidden="true"><path d="M60 20V180H520" stroke="#9aa3c9" stroke-width="1.5" fill="none"/>
+          <path d="M60 180 L520 40 V180Z" fill="#362CAC" fill-opacity=".08"/>
+          <path id="demoCurve" d="M60 180 L520 40" stroke="#362CAC" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="520" stroke-dashoffset="520"/>
+          <text x="470" y="200" font-size="13" fill="#373E5C">time</text><text x="68" y="34" font-size="13" fill="#373E5C">velocity</text></svg>
+      </div>
+      <div class="txt" id="demoTxt"></div>
+      <div class="wave" id="wave" aria-hidden="true"></div>
+      <div class="note">Example for illustration only</div>
+    </div>
+  </div>
+  <p class="built" data-r style="--d:620">Built with React, FastAPI, Qwen3-VL, Whisper, CLIP, Ollama and Gemini, Pocket TTS and Kokoro, SQLAlchemy and Electron.</p>
+</section>
+
+<!-- 6 SYSTEM ARCHITECTURE -->
+<section class="slide dslide" id="s6">
+  <div class="dhead"><h2>Complete system architecture</h2><div class="legend" id="leg6"></div></div>
+  <svg class="dsvg" id="sysSvg" role="img" aria-label="Animated system architecture diagram"></svg>
+  <div class="dbar" id="bar6"></div>
+</section>
+
+<!-- 7 PIPELINE -->
+<section class="slide dslide" id="s7">
+  <div class="dhead"><h2>Detailed pipeline architecture</h2><div class="legend" id="leg7"></div></div>
+  <svg class="dsvg" id="pipeSvg" role="img" aria-label="Animated AI pipeline diagram"></svg>
+  <div class="dbar" id="bar7"></div>
+</section>
+
+<!-- 8 CORE MODULES -->
+<section class="slide" id="s8">
+  <h2 data-r>Core modules</h2>
+  <p data-r style="--d:80" class="lead">Twelve modules work together, from the lecture video to the spoken explanation.</p>
+  <div class="mods" id="mods"></div>
+</section>
+
+<!-- 9 WHAT IS DONE -->
+<section class="slide" id="s9">
+  <h2 data-r>What is done</h2>
+  <p data-r style="--d:80" class="lead">Synapse is built end to end: an accessible interface, a durable backend and the full multimodal pipeline, running in the browser and as a desktop app.</p>
+  <ul class="done">
+    <li data-r style="--d:200"><i data-ic="check"></i>Accessible web app with embedded lecture player</li>
+    <li data-r style="--d:240"><i data-ic="check"></i>Durable lecture-processing backend (FastAPI)</li>
+    <li data-r style="--d:280"><i data-ic="check"></i>Transcription from captions or speech recognition</li>
+    <li data-r style="--d:320"><i data-ic="check"></i>Frame analysis, gesture detection and synchronization</li>
+    <li data-r style="--d:360"><i data-ic="check"></i>Vision-language understanding with structured evidence</li>
+    <li data-r style="--d:400"><i data-ic="check"></i>LLM explanation synthesis at three depths</li>
+    <li data-r style="--d:440"><i data-ic="check"></i>Text-to-speech with streamed and saved audio</li>
+    <li data-r style="--d:480"><i data-ic="check"></i>Voice commands and spoken replies</li>
+    <li data-r style="--d:520"><i data-ic="check"></i>Accounts, library, bookmarks and notes</li>
+    <li data-r style="--d:560"><i data-ic="check"></i>Lecture Q&amp;A grounded in the transcript</li>
+  </ul>
+</section>
+
+<!-- 10 CHALLENGES -->
+<section class="slide" id="s10">
+  <h2 data-r>Challenges</h2>
+  <p data-r style="--d:80" class="lead">Six problems shaped the design, and how Synapse addresses each.</p>
+  <div class="chal-head" data-r style="--d:150"><span>Challenge</span><span>How Synapse addresses it</span></div>
+  <div class="chal" data-r style="--d:200"><div><h3>Avoiding invented details</h3><p>Explanations must stay faithful to what the lecture shows and says.</p></div><p>Visual observations become structured evidence; a coverage plan and bounded inputs constrain the explanation.</p></div>
+  <div class="chal" data-r style="--d:260"><div><h3>Choosing what to describe</h3><p>Describing everything overwhelms; omitting a key relationship confuses.</p></div><p>Coverage planning picks what matters, and learners choose brief, standard or detailed depth.</p></div>
+  <div class="chal" data-r style="--d:320"><div><h3>Managing explanation timing</h3><p>Extra narration can collide with the instructor's speech.</p></div><p>Synchronization selects intervention moments; playback pauses only when an explanation takes over.</p></div>
+  <div class="chal" data-r style="--d:380"><div><h3>Recovering from partial failures</h3><p>One failed model step must not make the lecture unusable.</p></div><p>Durable jobs, checkpoints and retry or resume keep finished work and recover the rest.</p></div>
+  <div class="chal" data-r style="--d:440"><div><h3>Balancing time and cost</h3><p>Deep analysis of long videos needs heavy, repeated model calls.</p></div><p>A three-stage pipeline with caching reuses results and prioritises what the learner asks for.</p></div>
+  <div class="chal" data-r style="--d:500"><div><h3>Building an accessible interface</h3><p>Navigation, playback, progress and errors must work without sight.</p></div><p>Keyboard shortcuts, voice commands, live-region announcements and an explanation-ready playback gate.</p></div>
+</section>
+
+<!-- 11 FUTURE + THANKS -->
+<section class="slide" id="s11">
+  <h2 data-r>Future work</h2>
+  <p data-r style="--d:80" class="lead">The foundation is in place. The next steps are about evidence, quality and reach.</p>
+  <div class="road">
+    <div data-r style="--d:180"><h3>Evaluation with blind learners</h3><p>Structured studies of comprehension, trust and usability.</p></div>
+    <div data-r style="--d:240"><h3>Accuracy and latency benchmarks</h3><p>Measure faithfulness and response time across lecture types.</p></div>
+    <div data-r style="--d:300"><h3>Better user experience</h3><p>Smoother interventions, adaptive pacing, clearer feedback and richer voice interaction.</p></div>
+    <div data-r style="--d:360"><h3>Stronger explanation results</h3><p>Improved grounding, equation and diagram coverage, and more natural narration.</p></div>
+    <div data-r style="--d:420"><h3>Packaged desktop installer</h3><p>One-click setup with backend and models bundled.</p></div>
+    <div data-r style="--d:480"><h3>Wider deployment</h3><p>Multi-user hosting, more lecture sources and more subjects.</p></div>
+  </div>
+  <div class="thanks dark" data-r style="--d:600">
+    <img src="Assets/logos/symbol-white.svg" alt="">
+    <div><div class="t">Thank you</div><div class="q">Questions and discussion</div></div>
+    <div class="who">Hafiz Abdullah Saim · Maha Khalid · Memoona Shahid<br>Supervisor: Mr. Amaid Zia</div>
+  </div>
+</section>
+
+</div></div>
+<div id="hud">
+  <button id="bPrev" aria-label="Previous"><i data-ic="chev-l"></i></button>
+  <span id="count">1 / 11</span>
+  <button id="bNext" aria-label="Next"><i data-ic="chev-r"></i></button>
+  <button id="bFs" aria-label="Fullscreen"><i data-ic="expand"></i></button>
+</div>
+<script src="icons.js"></script>
+<script src="diagrams.js"></script>
+<script src="skins/skin.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

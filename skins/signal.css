@@ -1,0 +1,14 @@
+/* WORLD 1: SIGNAL. The deck is one axon; every slide is a synapse the impulse crosses. */
+.chain{left:120px;bottom:30px;width:1680px;height:44px}
+.chain svg{display:block;overflow:visible}
+.ax{stroke:var(--rule);stroke-width:2.2;fill:none;stroke-linecap:round;transition:stroke .5s}
+.ax.lit{stroke:var(--ind)}
+.bt{fill:var(--rule);transition:fill .5s}.bt.lit{fill:var(--ind)}
+.soma{fill:var(--bg);stroke:var(--rule);stroke-width:2.5;transition:fill .4s,stroke .4s}
+.soma.on{fill:var(--ind);stroke:var(--ind)}
+.soma.cur{fill:var(--teal);stroke:var(--teal);animation:fire 2.4s ease-out infinite}
+@keyframes fire{0%{stroke-width:2.5;stroke-opacity:1}60%{stroke-width:14;stroke-opacity:0}100%{stroke-width:2.5;stroke-opacity:0}}
+.imp{fill:var(--teal);stroke:#fff;stroke-width:2.5}
+/* a quiet echo of the same device in the headings: a short axon with a terminal */
+html[data-skin=signal] h2{position:relative}
+html[data-skin=signal] .slide:not(.dslide):not(#s1) h2::after{content:"";display:block;width:132px;height:4px;margin-top:18px;border-radius:2px;background:linear-gradient(90deg,var(--ind) 0 78%,transparent 78% 86%,var(--teal) 86%);}

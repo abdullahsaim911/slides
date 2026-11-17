@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concept A — The Catalog Drawer</title>
+<style>
+@font-face{font-family:"Special Elite";src:url(fonts/special-elite-latin-400-normal.woff2)}
+@font-face{font-family:"Alfa Slab One";src:url(fonts/alfa-slab-one-latin-400-normal.woff2)}
+@font-face{font-family:"Atkinson";font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+@font-face{font-family:"Atkinson";font-weight:600;src:url(fonts/atkinson-hyperlegible-next-latin-600-normal.woff2)}
+@font-face{font-family:"Atkinson";font-weight:700;src:url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2)}
+:root{--ink:#1d1a4a;--ind:#362CAC;--teal:#064E4A;--card:#F8F2E2;--rule:#c8d2ea;--rose:#e3a0ab;--drawer:#1a1744}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0d0b27;font-family:Atkinson,system-ui,sans-serif;color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1920px;height:1080px;position:relative;overflow:hidden;flex:none;
+  background:
+   repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),
+   radial-gradient(1400px 700px at 50% 0%,#2b2670 0%,var(--drawer) 60%,#100e30 100%)}
+/* drawer front */
+.front{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(#26216a,#1a1744);border-top:3px solid #3a3490;z-index:5}
+.front::before{content:none}
+.front .lbl{position:absolute;left:50%;top:34px;width:300px;height:78px;margin-left:-150px;padding-top:11px;text-align:center;font:400 22px "Special Elite";color:#3b2f0a;line-height:1.25;background:#f0e3b5;border:3px solid #c9a94f;border-radius:6px}
+.front::after{content:"";position:absolute;left:50%;top:92px;width:52px;height:20px;margin-left:-26px;border-radius:0 0 26px 26px;background:linear-gradient(#e7c566,#a6842a);display:none}
+.front .pull{position:absolute;left:84px;top:50px;width:84px;height:46px;border-radius:10px;background:linear-gradient(#e7c566,#9a7a24);box-shadow:0 5px 8px rgba(0,0,0,.55)}
+.front .pull.r{left:auto;right:84px}
+/* tabs */
+.tabs{position:absolute;left:150px;right:150px;top:34px;height:76px;z-index:4}
+.tab{position:absolute;top:44px;height:46px;padding:0 22px;border-radius:10px 10px 0 0;font:600 20px Atkinson;display:flex;align-items:center;color:#2a2650;background:var(--c);transition:top .35s cubic-bezier(.16,1,.3,1),filter .3s;filter:saturate(.8) brightness(.92)}
+.tab.on{top:16px;height:74px;filter:none;z-index:3;align-items:flex-start;padding-top:14px}
+/* card */
+.slide{position:absolute;left:100px;right:100px;top:106px;bottom:150px;opacity:0;visibility:hidden;transform:translateY(30px);transition:opacity .4s,transform .6s cubic-bezier(.16,1,.3,1),visibility 0s .6s;z-index:3}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .4s,transform .6s cubic-bezier(.16,1,.3,1)}
+.card{position:absolute;inset:0;background:var(--card);border-radius:8px;
+  box-shadow:0 10px 0 -3px #ebe2cb,0 20px 0 -6px #ddd3b9,0 30px 0 -9px #cfc4a7,0 38px 30px -8px rgba(0,0,0,.55);
+  background-image:repeating-linear-gradient(transparent 0 51px,var(--rule) 51px 52px);background-position:0 120px}
+.card::before{content:"";position:absolute;left:150px;top:0;bottom:0;width:2px;background:var(--rose);opacity:.8}
+.card::after{content:"";position:absolute;left:0;right:0;top:118px;height:2px;background:var(--rose);opacity:.8}
+.hole{position:absolute;left:50%;bottom:12px;width:30px;height:30px;margin-left:-15px;border-radius:50%;background:var(--drawer);box-shadow:inset 0 4px 8px rgba(0,0,0,.7),0 1px 0 #fff8}
+.call{position:absolute;left:176px;top:36px;font:400 26px "Special Elite";letter-spacing:.04em;color:var(--ink)}
+.call small{display:block;font-size:19px;opacity:.65}
+.lg{position:absolute;right:46px;top:26px;width:200px}
+.body{position:absolute;left:176px;right:70px;top:150px;bottom:90px}
+.typed{font:400 26px/52px "Special Elite";color:#25225a}
+h1{font:400 118px/1 "Alfa Slab One";color:var(--ind);letter-spacing:-.02em}
+h2{font:400 66px/1.05 "Alfa Slab One";color:var(--ind);letter-spacing:-.015em}
+.stamp{position:absolute;border:5px solid #b2243f;color:#b2243f;border-radius:10px;padding:8px 20px;font:400 34px "Special Elite";letter-spacing:.08em;transform:rotate(-8deg);opacity:.82;mix-blend-mode:multiply;text-transform:uppercase}
+.stamp.ind{border-color:var(--ind);color:var(--ind)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0 50px}
+.stat .n{font:400 132px/1 "Alfa Slab One";color:var(--ind);letter-spacing:-.04em}
+.stat .n small{font:400 32px "Special Elite";letter-spacing:0;margin-left:10px;color:var(--teal)}
+.stat p{font:400 24px/52px "Special Elite";max-width:480px;color:#25225a}
+/* diagram card */
+#sA3 .card{background-position:0 120px}
+.dwrap{position:absolute;left:176px;right:40px;top:132px;bottom:130px}
+#sysSvg{width:100%;height:100%;display:block}
+.cap{position:absolute;left:176px;right:70px;bottom:66px;display:flex;gap:30px;align-items:baseline}
+.cap .s{font:400 22px "Special Elite";color:var(--teal);white-space:nowrap}
+.cap .t{font:700 30px Atkinson;color:var(--ink);white-space:nowrap}
+.cap .d{font:400 22px Atkinson;color:#3b3868;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* diagram skin: nodes are small index cards */
+.node .box{fill:#fffdf6;stroke:#1d1a4a;stroke-width:2;rx:3}
+.node .tile{fill:var(--f);rx:3}
+.node .ico{stroke:var(--k);stroke-width:1.9}
+.node .lb{font:700 21px Atkinson;fill:#1d1a4a}
+.node .sb{font:400 16px Atkinson;fill:#4a4680}
+.node.seen .box{fill:#fffaea}
+.node.lit .box{fill:#fff4c9;stroke-width:3.4;filter:drop-shadow(5px 6px 0 rgba(29,26,74,.35))}
+.edge{fill:none;stroke:#1d1a4a;stroke-width:2.2;stroke-dasharray:1 7;stroke-linecap:round;opacity:.45}
+.edge.done{opacity:.8}.edge.on{opacity:1;stroke-dasharray:none;stroke-width:3.4}
+.arrow{fill:#1d1a4a;opacity:.5}.arrow.on,.arrow.done{opacity:1}
+.packet{fill:#b2243f;stroke:#fffdf6;stroke-width:2}
+.pc{position:fixed;right:20px;top:12px;font:400 16px "Special Elite";color:#bdb8f0;z-index:9}
+body.shot *{transition:none!important}
+</style></head><body>
+<div id="viewport"><div id="stage">
+ <nav class="tabs">
+  <span class="tab" style="left:0;--c:#DDDAFC" data-t="1">Synapse</span>
+  <span class="tab" style="left:150px;--c:#C8EEE9" data-t="2">Problem</span>
+  <span class="tab" style="left:300px;--c:#FDE6B2" data-t="3">Architecture</span>
+  <span class="tab" style="left:480px;--c:#FCDBE4;opacity:.85">Pipeline</span>
+  <span class="tab" style="left:630px;--c:#CDF1DB;opacity:.85">Modules</span>
+  <span class="tab" style="left:780px;--c:#DDDAFC;opacity:.85">Challenges</span>
+ </nav>
+
+ <section class="slide" id="sA1"><div class="card"><div class="hole"></div>
+  <div class="call">SYN 004.19<small>STEM · ACCESSIBILITY · BLIND LEARNERS</small></div>
+  <img class="lg" src="../Assets/logos/logo-horizontal-black.svg" alt="Synapse">
+  <div class="body">
+   <h1>Synapse</h1>
+   <div class="typed" style="margin-top:16px">Multimodal AI accessibility for online<br>STEM education of blind learners.</div>
+   <div class="typed" style="margin-top:6px;font-size:23px">Hafiz Abdullah Saim, Maha Khalid, Memoona Shahid.<br>Supervisor: Mr. Amaid Zia.<br>COMSATS University Islamabad, Lahore Campus.</div>
+  </div>
+  <div class="stamp ind" style="right:120px;bottom:130px">Final Year Project<br>2023&ndash;2027</div>
+ </div></section>
+
+ <section class="slide" id="sA2"><div class="card"><div class="hole"></div>
+  <div class="call">SYN 305.908<small>PROBLEM STATEMENT</small></div>
+  <div class="body">
+   <h2>STEM lectures are built on what you can see.</h2>
+   <div class="stats" style="margin-top:62px">
+    <div class="stat"><div class="n">285<small>million</small></div><p>people live with a visual impairment</p></div>
+    <div class="stat"><div class="n">39<small>million</small></div><p>of them are completely blind</p></div>
+    <div class="stat"><div class="n">70<small>%</small></div><p>of STEM content is lost when visuals are not converted</p></div>
+   </div>
+  </div>
+  <div class="stamp" style="right:90px;top:34px">Visuals not described</div>
+ </div></section>
+
+ <section class="slide" id="sA3"><div class="card"><div class="hole"></div>
+  <div class="call">SYN 006.35<small>COMPLETE SYSTEM ARCHITECTURE</small></div>
+  <div class="dwrap"><svg id="sysSvg"></svg></div>
+  <div class="cap"><span class="s" id="capS"></span><span class="t" id="capT"></span><span class="d" id="capD"></span></div>
+ </div></section>
+
+ <div class="front"><span class="pull"></span><div class="lbl">SYNAPSE<br>FYP 2023&ndash;27</div><span class="pull r"></span></div>
+</div></div>
+<div class="pc" id="pc"></div>
+<script>window.CONCEPT_CAT={user:{f:'#DDDAFC',k:'#362CAC'},frontend:{f:'#DDDAFC',k:'#362CAC'},backend:{f:'#CDF1DB',k:'#14683F'},multimodal:{f:'#C8EEE9',k:'#064E4A'},inference:{f:'#FCDBE4',k:'#B0245A'},storage:{f:'#FDE6B2',k:'#8A5A00'},external:{f:'#E8E2CF',k:'#5b5538'}};</script>
+<script src="../icons.js"></script><script src="../diagrams.js"></script><script src="concept.js"></script>
+<script>const tabs=[...document.querySelectorAll('.tab[data-t]')];new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['data-slide']});function sync(){tabs.forEach(t=>t.classList.toggle('on',t.dataset.t===document.body.dataset.slide))}sync();</script>
+</body></html>

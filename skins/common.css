@@ -1,0 +1,7 @@
+/* shared geometry for all design worlds: reserves a footer band for each world's signature device */
+html[data-skin] .slide:not(.dslide):not(#s1){padding-bottom:124px}
+html[data-skin] .dsvg{height:752px}
+html[data-skin] .dbar{bottom:98px;height:116px}
+html[data-skin] .dbar .sd{font-size:18px}
+.chain,.ad,.bfoot{position:absolute;z-index:6}
+html[data-skin] .mods{margin-top:40px}html[data-skin] .mod{padding:20px 0 22px}html[data-skin] .mod p{margin-top:6px}

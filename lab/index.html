@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synapse — 20 design concepts</title>
+<style>
+@font-face{font-family:AtkN;font-weight:400;src:url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2)}
+@font-face{font-family:AtkN;font-weight:600;src:url(fonts/atkinson-hyperlegible-next-latin-600-normal.woff2)}
+@font-face{font-family:AtkN;font-weight:700;src:url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2)}
+@font-face{font-family:AtkM;font-weight:600;src:url(fonts/atkinson-hyperlegible-mono-latin-600-normal.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:auto;background:#ECEEFC;color:#14172B;font-family:AtkN,system-ui,sans-serif;height:auto}
+body{padding:52px 64px 80px}
+h1{font-size:46px;letter-spacing:-.02em;color:#362CAC}
+p.l{font-size:20px;line-height:1.5;color:#373E5C;margin-top:12px;max-width:1100px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:34px}
+a.c{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #C3C9E6;border-radius:12px;overflow:hidden;transition:transform .2s,border-color .2s}
+a.c:hover,a.c:focus-visible{transform:translateY(-4px);border-color:#362CAC;outline:none}
+.th{height:340px;position:relative;overflow:hidden;background:#d9dcef;display:flex;align-items:center;justify-content:center}
+.th iframe{position:absolute;border:0;transform-origin:0 0;pointer-events:none}
+.t{padding:16px 20px 20px}
+.t b{font-size:24px;display:flex;gap:10px;align-items:baseline}.t b i{font:600 16px AtkM,monospace;color:#064E4A;font-style:normal}
+.t .tags{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 8px}.t .tags span{font:600 14px AtkN;border:1px solid #C3C9E6;border-radius:999px;padding:4px 11px;color:#373E5C;background:#F5F6FE}
+.t span.r{font-size:17px;line-height:1.45;color:#373E5C;display:block}
+.k{margin-top:30px;font-size:18px;color:#373E5C;line-height:1.7}
+</style></head><body>
+<h1>Synapse — 20 design concepts</h1>
+<p class="l">Each concept is rooted in the project, the audience or the STEM setting. Each has a different slide layout, a different orientation, and a different style of diagram: its own arrangement, node shape, connection style and data packet. All 20 animate the same verified architecture with GSAP. Click a card to open its three slides; press → to step through the animated diagram.</p>
+<div class="grid" id="grid"></div>
+<p class="k">Inside a concept: <b>→</b> / Space next (on the diagram it plays each step first) &middot; <b>←</b> back &middot; <b>P</b> auto-play the diagram &middot; <b>F</b> fullscreen &middot; or click the right / left side of the slide.<br>Tell me one number (or two to mix) and I will rebuild the whole 11-slide deck in that world.</p>
+<script>window.CONCEPTS=[];</script>
+<script src="concepts-1.js"></script><script src="concepts-2.js"></script><script src="concepts-3.js"></script><script src="concepts-4.js"></script>
+<script>
+const g=document.getElementById('grid');
+g.innerHTML=CONCEPTS.map(c=>`<a class="c" href="view.html?c=${c.id}"><div class="th" data-w="${c.stage[0]}" data-h="${c.stage[1]}"><iframe loading="lazy" src="view.html?c=${c.id}&shot#3.4" width="${c.stage[0]}" height="${c.stage[1]}" tabindex="-1" title="${c.name}"></iframe></div>
+<div class="t"><b>${c.id} &middot; ${c.name} <i>${c.orient}</i></b><div class="tags"><span>${c.style}</span></div><span class="r">${c.root}</span></div></a>`).join('');
+function fit(){document.querySelectorAll('.th').forEach(t=>{const w=+t.dataset.w,h=+t.dataset.h,s=Math.min(t.clientWidth/w,t.clientHeight/h),f=t.querySelector('iframe');f.style.transform='scale('+s+')';f.style.left=((t.clientWidth-w*s)/2)+'px';f.style.top=((t.clientHeight-h*s)/2)+'px';})}
+addEventListener('resize',fit);fit();
+</script>
+</body></html>
