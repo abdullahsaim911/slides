@@ -1,0 +1,61 @@
+SYNAPSE PRESENTATION - REQUIREMENTS
+====================================
+
+TO RUN THE PRESENTATION
+-----------------------
+No installation. No Node, Python, web server or internet connection.
+
+  Browser (one of):
+    - Google Chrome (recent version)       recommended
+    - Microsoft Edge (recent version)      tested
+    - Firefox (recent version)             not tested
+    - Safari                               not tested; older versions do not draw diagram arrowheads
+
+  Browser features used:
+    - CSS color-mix(), clip-path, flexbox, grid
+    - SVG markers with context-stroke
+    - Fullscreen API
+    - Web Speech API (optional, for the V key)
+
+  Display:
+    - 16:9 screen or projector recommended (the slides scale to fit any window)
+
+  Optional:
+    - A text-to-speech voice installed in the operating system, for spoken audio (V key).
+      Windows includes voices that work offline.
+
+FILES THAT MUST BE PRESENT
+--------------------------
+Keep these two folders side by side:
+
+  present/    index.html, style.css, deck.js, diagrams.js, icons.js,
+              vendor/gsap.min.js, fonts/
+  Assets/     logos/ and web/ (the deck loads ../Assets/logos/... and ../Assets/web/favicon.svg)
+
+BUNDLED LIBRARIES (already included, nothing to download)
+---------------------------------------------------------
+  GSAP 3.15.1                animation                 present/vendor/gsap.min.js
+  Lucide icons               ISC licence               present/icons.js
+  Gloock                     SIL Open Font Licence     present/fonts/
+  Atkinson Hyperlegible      SIL Open Font Licence     present/fonts/
+
+TO EDIT OR REBUILD (optional)
+-----------------------------
+  - Any text editor. There is no build step.
+  - Slide text:        present/index.html
+  - Theme and layout:  present/style.css
+  - Captions, spoken lines and step order: present/deck.js
+  - Diagram content:   present/diagrams.js
+  - Source of truth for the architecture: docs/system_architecture.json and
+    docs/pipeline_architecture.json
+
+TO TEST OR SCREENSHOT AUTOMATICALLY (optional, development only)
+----------------------------------------------------------------
+  - Microsoft Edge or Chrome in headless mode
+  - Open present/index.html?shot#SLIDE.STEP  (for example ?shot#6.3) to render a step in its final state
+
+BEFORE THE PRESENTATION
+-----------------------
+  - Open present/index.html on the presentation computer and projector and play through once.
+  - Press F for fullscreen.
+  - Decide whether to turn spoken audio on (V). It is off by default.

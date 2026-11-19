@@ -10,7 +10,7 @@
 <body>
 <div id="vp"><div id="stage">
 
-  <div class="bar" aria-hidden="true"><span class="rec"><i></i>Lecture 01</span><span id="lt">Synapse</span><span id="tc">00:04:12</span><span class="seg" id="seg"></span><span class="hint">→ step &nbsp; ← back &nbsp; V voice &nbsp; P auto &nbsp; F full</span></div>
+  <div class="bar" aria-hidden="true"><span id="lt">Synapse</span><span class="seg" id="seg"></span><span class="hint">→ step &nbsp; ← back &nbsp; V voice &nbsp; P auto &nbsp; F full</span></div>
 
   <div class="frame" id="frame">
 
@@ -49,40 +49,37 @@
 
     <!-- 4 -->
     <section class="sl" id="s4" aria-label="Proposed solution"><h2 class="sr">Proposed solution</h2>
+      <p class="s4lead" data-t="lead">A voice-controlled app that helps blind learners understand educational videos. It combines what is said, what is shown and what is being pointed at into one clear spoken explanation.</p>
       <ol class="steps">
-        <li data-t="f1"><span class="dot"><i data-ic="video"></i></span><h3>Lecture video</h3><p>Any YouTube STEM lecture</p></li>
-        <li data-t="f2"><span class="dot"><i data-ic="layers"></i></span><h3>Understand</h3><p>Speech, frames and instructor gestures together</p></li>
-        <li data-t="f3"><span class="dot"><i data-ic="braces"></i></span><h3>Ground</h3><p>Observations become structured visual evidence</p></li>
-        <li data-t="f4"><span class="dot"><i data-ic="brain"></i></span><h3>Explain</h3><p>An LLM writes the explanation at the chosen depth</p></li>
-        <li data-t="f5"><span class="dot"><i data-ic="volume"></i></span><h3>Speak</h3><p>Text-to-speech delivers it to the learner</p></li>
+        <li data-t="f1"><span class="dot"><i data-ic="video"></i></span><h3>Educational video</h3><p>A STEM lecture on YouTube</p></li>
+        <li data-t="f2"><span class="dot"><i data-ic="mic"></i></span><h3>Voice command</h3><p>The learner asks for an explanation</p></li>
+        <li data-t="f3"><span class="dot"><i data-ic="layers"></i></span><h3>Understand</h3><p>Speech, visuals and gestures analysed together</p></li>
+        <li data-t="f4"><span class="dot"><i data-ic="brain"></i></span><h3>Explain</h3><p>One clear, context-aware explanation</p></li>
+        <li data-t="f5"><span class="dot"><i data-ic="volume"></i></span><h3>Speak</h3><p>Read aloud to the learner</p></li>
       </ol>
-      <ul class="feats" data-t="feats"><li><i data-ic="mic"></i>Voice-controlled</li><li><i data-ic="keyboard"></i>Full keyboard navigation</li><li><i data-ic="sliders"></i>Adjustable detail level</li><li><i data-ic="library"></i>Personal explanation library</li></ul>
     </section>
 
     <!-- 5 -->
-    <section class="sl" id="s5" aria-label="What is Synapse"><h2 class="sr">What is Synapse</h2>
-      <div class="s5">
-        <div class="fg" data-t="fg">
-          <div><i data-ic="scan"></i><h3>Lecture understanding</h3><p>Transcript, frames and instructor cues analysed together</p></div>
-          <div><i data-ic="shield-check"></i><h3>Grounded explanations</h3><p>Built from visual evidence, not guesses</p></div>
-          <div><i data-ic="sliders"></i><h3>Adjustable depth</h3><p>Brief, standard or detailed</p></div>
-          <div><i data-ic="mic"></i><h3>Voice and keyboard</h3><p>Hands-free commands, no mouse needed</p></div>
-          <div><i data-ic="library"></i><h3>Personal library</h3><p>Saved explanations, bookmarks and notes</p></div>
-          <div><i data-ic="message"></i><h3>Lecture Q&amp;A</h3><p>Questions answered from the lecture itself</p></div>
-        </div>
-        <div class="lf" data-t="lf"><div class="vt"><span>illustrative lecture frame</span><span>04:12</span></div>
-          <div class="gr"><svg viewBox="0 0 560 330" aria-hidden="true"><path d="M60 20V290H520" stroke="#9aa3c9" stroke-width="2" fill="none"/><path d="M60 290 L520 60 V290Z" fill="#362CAC" fill-opacity=".09"/><path id="lfLine" d="M60 290 L520 60" stroke="#362CAC" stroke-width="6" fill="none" stroke-linecap="round"/><text x="468" y="318" font-size="17" fill="#373E5C">time</text><text x="70" y="40" font-size="17" fill="#373E5C">velocity</text></svg></div>
-          <div class="nt">The instructor says “this graph”, and draws a line.</div></div>
+    <section class="sl" id="s5" aria-label="What is Synapse"><h2 class="sr">What is Synapse?</h2>
+      <div class="tagbox" data-t="tag">
+        <p class="tag">When the instructor says “look at this”, Synapse tells you what “this” is.</p>
+        <p class="tagsub">A multimodal AI system that combines speech recognition, computer vision, gesture detection and a large language model to explain a lecture’s visuals out loud.</p>
+      </div>
+      <div class="pg">
+        <div data-t="p1"><i data-ic="scan"></i><h3>Understands lectures</h3><ul><li>Turns speech into text</li><li>Reads diagrams and equations</li><li>Notices what is being pointed at</li></ul></div>
+        <div data-t="p2"><i data-ic="volume"></i><h3>Explains it aloud</h3><ul><li>Clear, spoken explanations</li><li>Brief, standard or detailed</li><li>At the right moment, or on request</li></ul></div>
+        <div data-t="p3"><i data-ic="mic"></i><h3>Works without sight</h3><ul><li>Voice commands</li><li>Full keyboard navigation</li><li>Screen-reader friendly</li></ul></div>
+        <div data-t="p4"><i data-ic="library"></i><h3>Keeps learning going</h3><ul><li>Saved explanations and notes</li><li>Questions about the lecture</li><li>Practice questions to test yourself</li></ul></div>
       </div>
     </section>
 
     <!-- 6 -->
     <section class="sl" id="s6" aria-label="Complete system architecture"><h2 class="sr">Complete system architecture</h2><svg class="dsvg" id="sysSvg" role="img" aria-label="System architecture"></svg></section>
     <!-- 7 -->
-    <section class="sl" id="s7" aria-label="Detailed pipeline architecture"><h2 class="sr">Detailed pipeline architecture</h2><svg class="dsvg" id="pipeSvg" role="img" aria-label="Pipeline architecture"></svg></section>
+    <section class="sl" id="s7" aria-label="Core modules"><h2 class="sr">Core modules</h2><div class="mods" id="mods"></div></section>
 
     <!-- 8 -->
-    <section class="sl" id="s8" aria-label="Core modules"><h2 class="sr">Core modules</h2><div class="mods" id="mods"></div></section>
+    <section class="sl" id="s8" aria-label="Detailed pipeline architecture"><h2 class="sr">Detailed pipeline architecture</h2><svg class="dsvg" id="pipeSvg" role="img" aria-label="Pipeline architecture"></svg></section>
 
     <!-- 9 -->
     <section class="sl" id="s9" aria-label="What is done"><h2 class="sr">What is done</h2>

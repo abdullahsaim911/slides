@@ -60,21 +60,21 @@ function roundedPath(pts, r=16){
 
 /* ---------- diagram engine ---------- */
 function Diagram(svg, cfg, ui){
-  svg.setAttribute('viewBox',`0 0 ${cfg.W} ${cfg.H}`); if(cfg.big) svg.classList.add('big');
+  svg.setAttribute('viewBox',`0 0 ${cfg.W} ${cfg.H}`); if(cfg.big) svg.classList.add('big'); if(cfg.mid) svg.classList.add('mid');
   const NW=cfg.nw, NH=cfg.nh;
   const gBands=el('g',{},svg), gEdges=el('g',{},svg), gNodes=el('g',{},svg), gPk=el('g',{},svg);
   (cfg.bands||[]).forEach(b=>{ el('rect',{class:'band',x:b.x,y:b.y,width:b.w,height:b.h,rx:26},gBands); const t=el('text',{class:'bandlbl',x:cfg.lblLeft?b.x+22:b.x+b.w/2,y:b.y+26,'text-anchor':cfg.lblLeft?'start':'middle'},gBands); t.textContent=b.t; });
   const nodes={};
   cfg.nodes.forEach((n,i)=>{
-    const c=CAT[n.c]; const o={...n,w:NW,h:NH};
-    const g=el('g',{class:'node',style:`--k:${c.k};--f:${c.f};--tx:${n.x}px;--ty:${n.cy-NH/2}px`,transform:`translate(${n.x},${n.cy-NH/2})`},gNodes);
-    const T=cfg.big?64:50, tx=cfg.big?96:72;
-    el('rect',{class:'box',width:NW,height:NH,rx:cfg.big?14:10},g);
-    el('rect',{class:'tile',x:16,y:(NH-T)/2,width:T,height:T,rx:cfg.big?12:9},g);
-    const sc=T*0.56/24; const ig=el('g',{class:'ico',transform:`translate(${16+T/2-12*sc},${(NH-T)/2+T/2-12*sc}) scale(${sc})`},g); ig.innerHTML=ICONS[n.i]||'';
-    const lines=n.l.split('\n'); const two=lines.length>1; const l0=cfg.big?NH/2-8:30, lh=cfg.big?25:19;
-    lines.forEach((ln,k)=>{ const t=el('text',{class:'lb',x:tx,y:two?(l0+k*lh):(NH/2-(cfg.big?2:3))},g); t.textContent=ln; });
-    const s=el('text',{class:'sb',x:tx,y:two?(NH-(cfg.big?20:12)):NH/2+(cfg.big?24:17)},g); s.textContent=n.s;
+    const c=CAT[n.c]; const o={...n,w:n.w||NW,h:n.h||NH};
+    const g=el('g',{class:'node',style:`--k:${c.k};--f:${c.f};--tx:${n.x}px;--ty:${n.cy-o.h/2}px`,transform:`translate(${n.x},${n.cy-o.h/2})`},gNodes);
+    const T=cfg.big?64:cfg.mid?44:50, tx=cfg.big?96:cfg.mid?68:72;
+    el('rect',{class:'box',width:o.w,height:o.h,rx:cfg.big?14:10},g);
+    el('rect',{class:'tile',x:16,y:(o.h-T)/2,width:T,height:T,rx:cfg.big?12:9},g);
+    const sc=T*0.56/24; const ig=el('g',{class:'ico',transform:`translate(${16+T/2-12*sc},${(o.h-T)/2+T/2-12*sc}) scale(${sc})`},g); ig.innerHTML=ICONS[n.i]||'';
+    const lines=n.l.split('\n'); const two=lines.length>1; const l0=cfg.big?o.h/2-8:cfg.mid?27:30, lh=cfg.big?25:cfg.mid?22:19;
+    lines.forEach((ln,k)=>{ const t=el('text',{class:'lb',x:tx,y:two?(l0+k*lh):(o.h/2-(cfg.big?2:3))},g); t.textContent=ln; });
+    const s=el('text',{class:'sb',x:tx,y:two?(o.h-(cfg.big?20:cfg.mid?10:12)):o.h/2+(cfg.big?24:17)},g); s.textContent=n.s;
     g.style.opacity=0; setTimeout(()=>{g.style.opacity=1;},0);
     o.g=g; nodes[n.id]=o;
   });
@@ -178,49 +178,76 @@ function makeBar(barEl, getD){
    one JSON edge between the blocks' members (verified by check.js).
    ==================================================================== */
 const SYS = (()=>{
-  const W=300, X=[20,382,744,1106,1468], R=[100,340,600];
-  const N=(id,c,x,cy,i,l,s,m)=>({id,c,x,cy,i,l,s,m});
+  /* five layers: client, gateway, services, intelligence, data. The API gateway is the hub. */
+  const W=250, H=80, X=[170,490,810,1130,1450], cx=i=>X[i]+W/2, AW=1530, AC=X[0]+AW/2;
+  const Y={A:60,B:168,G:280,S:402,I:540,D:662};
+  const N=(id,c,x,cy,i,l,s,m,o)=>({id,c,x,cy,i,l,s,m,...o});
   const nodes=[
-    N('youtube','external',X[4],R[0],'tv','YouTube','lecture video source',['youtube']),
-    N('learner','user',X[0],R[1],'user','Learner','blind or low-vision student',['learner']),
-    N('frontend','frontend',X[1],R[1],'monitor','Accessible\nFrontend','React · voice · keyboard',['frontend_app','video_player','voice_ui']),
-    N('backend','backend',X[2],R[1],'server','Backend\n& APIs','FastAPI · accounts',['api','accounts']),
-    N('orchestration','backend',X[3],R[1],'workflow','Processing &\nOrchestration','jobs · preparation · priority',['jobs','preparation','owned_requests']),
-    N('analysis','multimodal',X[4],R[1],'layers','Multimodal\nAnalysis','speech · frames · gestures',['ingestion','transcription','frame_analysis','synchronization']),
-    N('delivery','frontend',X[1],R[2],'headphones','Explanation\nDelivery','text · audio stream',['api']),
-    N('storage','storage',X[2],R[2],'database','Data\nStorage','database · artifacts · media',['database','artifact_storage']),
-    N('explain','multimodal',X[3],R[2],'brain','Explanation\nGeneration','evidence · text · speech',['visual_analysis','evidence_context','explanation_generation','speech_generation']),
-    N('inference','inference',X[4],R[2],'sparkles','AI\nInference','vision · language models',['vlm_service','explanation_model','voice_service']),
+    N('browser','storage',X[0],Y.A,'save','Browser\nState','preferences · recovery',['browser_storage']),
+    N('desktop','frontend',X[1],Y.A,'monitor','Desktop\nShell','optional Electron host',['desktop_runtime']),
+    N('learner','user',X[0],Y.B,'user','Learner','blind or low-vision',['learner']),
+    N('frontend','frontend',X[1],Y.B,'keyboard','Accessible\nApp','player · keyboard · UI',['frontend_app','video_player']),
+    N('youtube','external',X[4],Y.B,'tv','YouTube','lecture source',['youtube']),
+    N('api','backend',X[0],Y.G,'server','FastAPI Gateway','validates requests · routes work · serves text and audio',['api'],{w:AW,h:64}),
+    N('qa','backend',X[0],Y.S,'message','Lecture Q&A\n& Quiz','Q&A · quiz when enabled',['ask_quiz']),
+    N('ondemand','backend',X[1],Y.S,'target','On-Demand\nRequests','learner priority',['owned_requests']),
+    N('jobs','backend',X[2],Y.S,'workflow','Processing\nJobs','durable · resumable',['jobs']),
+    N('accounts','backend',X[3],Y.S,'library','Accounts\n& Library','saved learning data',['accounts']),
+    N('voice','backend',X[4],Y.S,'mic','Voice\nCommands','listen · interpret · reply',['voice_ui','voice_service']),
+    N('models','inference',X[0],Y.I,'sparkles','AI Models','vision · language · text',['vlm_service','explanation_model','qa_model']),
+    N('pipeline','multimodal',X[1],Y.I,'brain','Explanation\nPipeline','evidence · text · speech',['preparation','visual_analysis','evidence_context','explanation_generation','speech_generation']),
+    N('analysis','multimodal',X[2],Y.I,'layers','Multimodal\nAnalysis','speech · frames · gestures',['ingestion','transcription','frame_analysis','synchronization']),
+    N('data','storage',X[0],Y.D,'database','Data Storage','SQL database · artifacts · managed media · checkpoints',['database','artifact_storage'],{w:AW,h:64}),
   ];
   const E=(id,s,t,o)=>[id,s,t,o];
+  const ao=i=>cx(i)-AC, my=(Y.S+H/2+Y.I-H/2)/2;
   const edges=[
-    E('h01','learner','frontend',{p:'r-l',so:-18,to:-18}),
-    E('h02','frontend','learner',{p:'l-r',so:18,to:18}),
-    E('h03','youtube','frontend',{route:['S:l',{x:'T'},'T:t']}),
-    E('h04','frontend','backend',{p:'r-l'}),
-    E('h05','backend','orchestration',{p:'r-l'}),
-    E('h06','youtube','analysis',{p:'b-t'}),
-    E('h07','orchestration','analysis',{p:'r-l',so:-18,to:-18}),
-    E('h08','analysis','orchestration',{p:'l-r',so:18,to:18}),
-    E('h09','orchestration','explain',{p:'b-t'}),
-    E('h10','orchestration','storage',{route:['S:b',{y:470},{x:'T'},'T:t'],so:-80,to:50}),
-    E('h11','backend','storage',{p:'b-t',so:-30,to:-30}),
-    E('h12','explain','storage',{p:'l-r'}),
-    E('h13','explain','inference',{p:'r-l',so:-18,to:-18}),
-    E('h14','inference','explain',{p:'l-r',so:18,to:18}),
-    E('h15','storage','delivery',{p:'l-r'}),
-    E('h16','delivery','frontend',{p:'t-b'}),
+    E('e01','learner','frontend',{p:'r-l',so:-16,to:-16}),
+    E('e02','frontend','learner',{p:'l-r',so:16,to:16}),
+    E('e03','desktop','frontend',{p:'b-t',so:30,to:30}),
+    E('e04','frontend','browser',{route:['S:t',{y:114},{x:'T'},'T:b'],so:-30}),
+    E('e05','youtube','frontend',{p:'l-r'}),
+    E('e06','frontend','api',{p:'b-t',so:-20,to:ao(1)-20}),
+    E('e07','api','frontend',{p:'t-b',so:ao(1)+20,to:20}),
+    E('e08','api','youtube',{p:'t-b',so:ao(4),to:0}),
+    E('e09','api','qa',{p:'b-t',so:ao(0)-14,to:-14}),
+    E('e10','qa','api',{p:'t-b',so:14,to:ao(0)+14}),
+    E('e11','api','ondemand',{p:'b-t',so:ao(1),to:0}),
+    E('e12','api','jobs',{p:'b-t',so:0,to:0}),
+    E('e13','api','accounts',{p:'b-t',so:ao(3),to:0}),
+    E('e14','api','voice',{p:'b-t',so:ao(4)-14,to:-14}),
+    E('e15','voice','api',{p:'t-b',so:14,to:ao(4)+14}),
+    E('e16','ondemand','jobs',{p:'r-l',so:-16,to:-16}),
+    E('e17','jobs','ondemand',{p:'l-r',so:16,to:16}),
+    E('e18','ondemand','pipeline',{p:'b-t',so:-20,to:-20}),
+    E('e19','jobs','pipeline',{route:['S:b',{y:my},{x:'T'},'T:t'],so:-60,to:40}),
+    E('e20','jobs','analysis',{p:'b-t',so:-18,to:-18}),
+    E('e21','analysis','jobs',{p:'t-b',so:18,to:18}),
+    E('e22','qa','models',{p:'b-t',so:-18,to:-18}),
+    E('e23','models','qa',{p:'t-b',so:18,to:18}),
+    E('e24','models','pipeline',{p:'r-l',so:-16,to:-16}),
+    E('e25','pipeline','models',{p:'l-r',so:16,to:16}),
+    E('e26','youtube','analysis',{route:['S:r',{x:1755},{y:'T'},'T:r']}),
+    E('e27','pipeline','data',{p:'b-t',so:0,to:ao(1)}),
+    E('e28','analysis','data',{p:'b-t',so:0,to:0}),
+    E('e29','accounts','data',{p:'b-t',so:0,to:ao(3)}),
+    E('e30','data','api',{p:'t-b',so:480,to:480}),
+    E('e31','data','qa',{route:['S:l',{x:150},{y:'T'},'T:l']}),
   ];
   const phases=[
-    {t:'Open the lecture',d:'The learner opens the accessible frontend. The lecture streams from YouTube into the embedded player.',steps:[['h01','h03']]},
-    {t:'Send the request',d:'The frontend calls the FastAPI backend, which hands the lecture to processing and orchestration as a durable job.',steps:[['h04'],['h05']]},
-    {t:'Analyse the lecture',d:'Speech, frames and instructor gestures are analysed in parallel and synchronized. The lecture context is saved.',steps:[['h07','h06'],['h08'],['h10']]},
-    {t:'Understand and explain',d:'The explanation pipeline asks the vision model for visual evidence, then the language model for a grounded explanation.',steps:[['h09'],['h13'],['h14']]},
-    {t:'Speak and store',d:'Text and speech are generated, then saved as artifacts for delivery and reuse.',steps:[['h12']]},
-    {t:'Deliver the explanation',d:'Text and audio are served back through the API and presented to the learner as accessible text and sound.',steps:[['h15'],['h16'],['h02']]},
-    {t:'Personal learning data',d:'Accounts keep the learner’s library, bookmarks and saved explanations in the data store.',steps:[['h11']]},
+    {t:'Open the lecture',d:'The learner opens the accessible app, optionally inside the desktop shell, and the lecture streams in from YouTube.',steps:[['e01','e03','e05']]},
+    {t:'Send the request',d:'The app calls the FastAPI gateway, which checks the lecture with YouTube and creates a durable processing job.',steps:[['e06'],['e08','e12']]},
+    {t:'Analyse the lecture',d:'Speech, frames and gestures are analysed in parallel and synchronized, and the lecture context is saved.',steps:[['e20','e26'],['e21'],['e28']]},
+    {t:'Understand and explain',d:'The explanation pipeline asks the vision and language models for grounded evidence and a clear explanation.',steps:[['e19'],['e25'],['e24']]},
+    {t:'Speak and deliver',d:'Text and speech are saved, served back through the gateway and presented to the learner as accessible text and sound.',steps:[['e27'],['e30'],['e07'],['e02']]},
+    {t:'Explain on demand',d:'When the learner asks about the current moment, the request jumps the queue and that part is prepared first.',steps:[['e11'],['e16'],['e18']]},
+    {t:'Control by voice',d:'A spoken command travels through the gateway to speech recognition, and a spoken reply returns to the app.',steps:[['e06'],['e14'],['e15'],['e07']]},
+    {t:'Ask or take a quiz',d:'Questions and quizzes are answered from the lecture transcript by their own model, separate from explanations.',steps:[['e09'],['e31'],['e22'],['e23'],['e10']]},
+    {t:'Keep learning data',d:'Accounts store the learner’s library, notes and history, while preferences stay in the browser.',steps:[['e13'],['e29'],['e04']]},
   ];
-  return {W:1790,H:700,nw:W,nh:120,big:1,nodes,edges,phases,bands:[]};
+  const B=(y,h,t)=>({x:0,y,w:1790,h,t});
+  const bands=[B(8,212,'CLIENT'),B(234,92,'GATEWAY'),B(340,124,'SERVICES'),B(478,124,'INTELLIGENCE'),B(616,92,'DATA')];
+  return {W:1790,H:716,nw:W,nh:H,mid:1,lblLeft:1,nodes,edges,phases,bands};
 })();
 
 /* ====================================================================
